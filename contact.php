@@ -12,11 +12,9 @@
         $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
         $message = trim($_POST["message"]);
 
-        
-
         // Set the recipient email address.
         // FIXME: Update this to your desired email address.
-        $recipient = "example@example.com";
+        $recipient = "jainabhinav639@gmail.com";
 
         // Build the email content.
         $email_content = "Name $name\n";

@@ -273,53 +273,324 @@
             </section>
 
             <!-- Contact Section Start -->
-            <section class="contact-section-33 fix section-padding pt-0">
+            <section class="fix section-padding pt-0">
                 <div class="container">
-                    <div class="contact-wrapper-2">
-                        <div class="row g-4 align-items-center">
-                            <div class="col-lg-12">
-                                <div class="contact-content">
-                                    <h2 class="inner-font fw-700 text-header-color">Book Your Compliance Demo</h2>
-                                    <p>
-                                        Ready to digitize your society's governance? Request a complimentary walkthrough
-                                        of the <b>Propert-Ease</b> ecosystem. Our experts will show you how to automate
-                                        your statutory filings and map your custom domain in minutes.
-                                    </p>
-                                    <form action="contact.php" id="contact-form" method="POST"
-                                        class="contact-form-items">
+                    <div class="compliance-demo-wrapper" style="
+                        border-radius: 24px;
+                        overflow: hidden;
+                        box-shadow: 0 25px 60px rgba(0,0,0,0.08);
+                    ">
+                        <div class="row g-0">
+                            <!-- Left Info Panel -->
+                            <div class="col-lg-5">
+                                <div style="
+                                    background: linear-gradient(145deg, #2D31FA 0%, #1a1d8f 50%, #0e1060 100%);
+                                    padding: 60px 45px;
+                                    height: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: center;
+                                    position: relative;
+                                    overflow: hidden;
+                                ">
+                                    <!-- Decorative circles -->
+                                    <div
+                                        style="position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.05);">
+                                    </div>
+                                    <div
+                                        style="position:absolute;bottom:-40px;left:-40px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,0.03);">
+                                    </div>
+                                    <div
+                                        style="position:absolute;top:50%;right:20px;width:80px;height:80px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);">
+                                    </div>
+
+                                    <div style="position:relative;z-index:2;">
+                                        <span style="
+                                            display:inline-block;
+                                            background: rgba(255,255,255,0.15);
+                                            color: #fff;
+                                            padding: 6px 16px;
+                                            border-radius: 50px;
+                                            font-size: 13px;
+                                            font-weight: 600;
+                                            letter-spacing: 1px;
+                                            text-transform: uppercase;
+                                            margin-bottom: 24px;
+                                            backdrop-filter: blur(10px);
+                                        ">🏛️ Free Demo</span>
+                                        <h2 style="
+                                            color: #fff;
+                                            font-size: 32px;
+                                            font-weight: 700;
+                                            line-height: 1.3;
+                                            margin-bottom: 16px;
+                                        ">Book Your <br>Compliance Demo</h2>
+                                        <p style="
+                                            color: rgba(255,255,255,0.75);
+                                            font-size: 15px;
+                                            line-height: 1.7;
+                                            margin-bottom: 40px;
+                                        ">
+                                            Request a complimentary walkthrough of the <b
+                                                style="color:#fff;">Propert-Ease</b>
+                                            ecosystem. Automate statutory filings and go digital in minutes.
+                                        </p>
+
+                                        <!-- Feature highlights -->
+                                        <div style="display:flex;flex-direction:column;gap:20px;">
+                                            <div style="display:flex;align-items:flex-start;gap:14px;">
+                                                <div style="
+                                                    min-width:44px;height:44px;
+                                                    background:rgba(255,255,255,0.12);
+                                                    border-radius:12px;
+                                                    display:flex;align-items:center;justify-content:center;
+                                                    backdrop-filter:blur(10px);
+                                                ">
+                                                    <i class="fa-solid fa-shield-halved"
+                                                        style="color:#7dd3fc;font-size:18px;"></i>
+                                                </div>
+                                                <div>
+                                                    <h5
+                                                        style="color:#fff;font-size:15px;font-weight:600;margin-bottom:4px;">
+                                                        RCS & RERA Compliant</h5>
+                                                    <p
+                                                        style="color:rgba(255,255,255,0.6);font-size:13px;margin:0;line-height:1.5;">
+                                                        Built-in regulatory frameworks for Indian housing societies</p>
+                                                </div>
+                                            </div>
+                                            <div style="display:flex;align-items:flex-start;gap:14px;">
+                                                <div style="
+                                                    min-width:44px;height:44px;
+                                                    background:rgba(255,255,255,0.12);
+                                                    border-radius:12px;
+                                                    display:flex;align-items:center;justify-content:center;
+                                                    backdrop-filter:blur(10px);
+                                                ">
+                                                    <i class="fa-solid fa-chart-line"
+                                                        style="color:#a78bfa;font-size:18px;"></i>
+                                                </div>
+                                                <div>
+                                                    <h5
+                                                        style="color:#fff;font-size:15px;font-weight:600;margin-bottom:4px;">
+                                                        Transparent Governance</h5>
+                                                    <p
+                                                        style="color:rgba(255,255,255,0.6);font-size:13px;margin:0;line-height:1.5;">
+                                                        Real-time dashboards for committee members & residents</p>
+                                                </div>
+                                            </div>
+                                            <div style="display:flex;align-items:flex-start;gap:14px;">
+                                                <div style="
+                                                    min-width:44px;height:44px;
+                                                    background:rgba(255,255,255,0.12);
+                                                    border-radius:12px;
+                                                    display:flex;align-items:center;justify-content:center;
+                                                    backdrop-filter:blur(10px);
+                                                ">
+                                                    <i class="fa-solid fa-clock-rotate-left"
+                                                        style="color:#34d399;font-size:18px;"></i>
+                                                </div>
+                                                <div>
+                                                    <h5
+                                                        style="color:#fff;font-size:15px;font-weight:600;margin-bottom:4px;">
+                                                        Go Live in 48 Hours</h5>
+                                                    <p
+                                                        style="color:rgba(255,255,255,0.6);font-size:13px;margin:0;line-height:1.5;">
+                                                        Free data migration & white-glove onboarding included</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Trust stats -->
+                                        <div style="
+                                            margin-top:40px;
+                                            padding-top:28px;
+                                            border-top:1px solid rgba(255,255,255,0.12);
+                                            display:flex;
+                                            gap:30px;
+                                        ">
+                                            <div>
+                                                <h4
+                                                    style="color:#fff;font-size:24px;font-weight:700;margin-bottom:2px;">
+                                                    500+</h4>
+                                                <p
+                                                    style="color:rgba(255,255,255,0.5);font-size:12px;margin:0;text-transform:uppercase;letter-spacing:0.5px;">
+                                                    Societies</p>
+                                            </div>
+                                            <div>
+                                                <h4
+                                                    style="color:#fff;font-size:24px;font-weight:700;margin-bottom:2px;">
+                                                    99.9%</h4>
+                                                <p
+                                                    style="color:rgba(255,255,255,0.5);font-size:12px;margin:0;text-transform:uppercase;letter-spacing:0.5px;">
+                                                    Uptime</p>
+                                            </div>
+                                            <div>
+                                                <h4
+                                                    style="color:#fff;font-size:24px;font-weight:700;margin-bottom:2px;">
+                                                    4.9★</h4>
+                                                <p
+                                                    style="color:rgba(255,255,255,0.5);font-size:12px;margin:0;text-transform:uppercase;letter-spacing:0.5px;">
+                                                    Rating</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Form Panel -->
+                            <div class="col-lg-7">
+                                <div style="
+                                    background: #f8f9fc;
+                                    padding: 55px 50px;
+                                    height: 100%;
+                                ">
+                                    <div style="margin-bottom:30px;">
+                                        <h3 style="
+                                            font-size: 24px;
+                                            font-weight: 700;
+                                            color: #1a1a2e;
+                                            margin-bottom: 8px;
+                                        ">Schedule Your Free Walkthrough</h3>
+                                        <p style="color:#666;font-size:14px;margin:0;">
+                                            Fill in the details below and our governance specialist will reach out
+                                            within 24 hours.
+                                        </p>
+                                    </div>
+                                    <form action="../contact.php" id="contact-form" method="POST">
                                         <div class="row g-4">
-                                            <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s">
-                                                <div class="form-clt">
-                                                    <span>Full Name*</span>
+                                            <div class="col-lg-6 wow fadeInUp" data-wow-delay=".2s">
+                                                <div style="position:relative;">
+                                                    <label
+                                                        style="display:block;font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:8px;">
+                                                        <i class="fa-regular fa-user"
+                                                            style="color:#2D31FA;margin-right:6px;"></i>Full Name*
+                                                    </label>
                                                     <input type="text" name="name" id="name"
-                                                        placeholder="E.g. Rajesh Malhotra">
+                                                        placeholder="E.g. Rajesh Malhotra" style="
+                                                            width:100%;padding:14px 18px;
+                                                            border:1.5px solid #e2e5f1;
+                                                            border-radius:12px;
+                                                            font-size:14px;
+                                                            background:#fff;
+                                                            transition:all 0.3s ease;
+                                                            outline:none;
+                                                        "
+                                                        onfocus="this.style.borderColor='#2D31FA';this.style.boxShadow='0 0 0 3px rgba(45,49,250,0.08)'"
+                                                        onblur="this.style.borderColor='#e2e5f1';this.style.boxShadow='none'">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s">
+                                                <div style="position:relative;">
+                                                    <label
+                                                        style="display:block;font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:8px;">
+                                                        <i class="fa-regular fa-envelope"
+                                                            style="color:#2D31FA;margin-right:6px;"></i>Society Email*
+                                                    </label>
+                                                    <input type="email" name="email" id="email"
+                                                        placeholder="secretary@yoursociety.com" style="
+                                                            width:100%;padding:14px 18px;
+                                                            border:1.5px solid #e2e5f1;
+                                                            border-radius:12px;
+                                                            font-size:14px;
+                                                            background:#fff;
+                                                            transition:all 0.3s ease;
+                                                            outline:none;
+                                                        "
+                                                        onfocus="this.style.borderColor='#2D31FA';this.style.boxShadow='0 0 0 3px rgba(45,49,250,0.08)'"
+                                                        onblur="this.style.borderColor='#e2e5f1';this.style.boxShadow='none'">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 wow fadeInUp" data-wow-delay=".4s">
+                                                <div style="position:relative;">
+                                                    <label
+                                                        style="display:block;font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:8px;">
+                                                        <i class="fa-regular fa-building"
+                                                            style="color:#2D31FA;margin-right:6px;"></i>Society Name*
+                                                    </label>
+                                                    <input type="text" name="society" id="society"
+                                                        placeholder="E.g. Silver Arch Enclave" style="
+                                                            width:100%;padding:14px 18px;
+                                                            border:1.5px solid #e2e5f1;
+                                                            border-radius:12px;
+                                                            font-size:14px;
+                                                            background:#fff;
+                                                            transition:all 0.3s ease;
+                                                            outline:none;
+                                                        "
+                                                        onfocus="this.style.borderColor='#2D31FA';this.style.boxShadow='0 0 0 3px rgba(45,49,250,0.08)'"
+                                                        onblur="this.style.borderColor='#e2e5f1';this.style.boxShadow='none'">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 wow fadeInUp" data-wow-delay=".5s">
-                                                <div class="form-clt">
-                                                    <span>Society Email*</span>
-                                                    <input type="email" name="email" id="email"
-                                                        placeholder="society@yourdomain.com">
+                                                <div style="position:relative;">
+                                                    <label
+                                                        style="display:block;font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:8px;">
+                                                        <i class="fa-solid fa-location-dot"
+                                                            style="color:#2D31FA;margin-right:6px;"></i>City*
+                                                    </label>
+                                                    <input type="text" name="city" id="city"
+                                                        placeholder="E.g. New Delhi" style="
+                                                            width:100%;padding:14px 18px;
+                                                            border:1.5px solid #e2e5f1;
+                                                            border-radius:12px;
+                                                            font-size:14px;
+                                                            background:#fff;
+                                                            transition:all 0.3s ease;
+                                                            outline:none;
+                                                        "
+                                                        onfocus="this.style.borderColor='#2D31FA';this.style.boxShadow='0 0 0 3px rgba(45,49,250,0.08)'"
+                                                        onblur="this.style.borderColor='#e2e5f1';this.style.boxShadow='none'">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 wow fadeInUp" data-wow-delay=".6s">
-                                                <div class="form-clt">
-                                                    <span>Society Name & Location*</span>
-                                                    <input type="text" name="society" id="society"
-                                                        placeholder="E.g. Silver Arch Enclave, New Delhi">
+                                                <div style="position:relative;">
+                                                    <label
+                                                        style="display:block;font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:8px;">
+                                                        <i class="fa-regular fa-comment-dots"
+                                                            style="color:#2D31FA;margin-right:6px;"></i>Tell Us About
+                                                        Your Requirements
+                                                    </label>
+                                                    <textarea name="message" id="message"
+                                                        placeholder="E.g. We need help with annual statutory filings and member account management..."
+                                                        rows="4" style="
+                                                            width:100%;padding:14px 18px;
+                                                            border:1.5px solid #e2e5f1;
+                                                            border-radius:12px;
+                                                            font-size:14px;
+                                                            background:#fff;
+                                                            transition:all 0.3s ease;
+                                                            outline:none;
+                                                            resize:vertical;
+                                                        "
+                                                        onfocus="this.style.borderColor='#2D31FA';this.style.boxShadow='0 0 0 3px rgba(45,49,250,0.08)'"
+                                                        onblur="this.style.borderColor='#e2e5f1';this.style.boxShadow='none'"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 wow fadeInUp" data-wow-delay=".7s">
-                                                <div class="form-clt">
-                                                    <span>Tell us about your requirements*</span>
-                                                    <textarea name="message" id="message"
-                                                        placeholder="How can we help your Management Committee?"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-7 wow fadeInUp" data-wow-delay=".9s">
-                                                <button type="submit" class="gt-theme-btn">
+                                                <button type="submit" style="
+                                                    width:100%;
+                                                    padding:16px 32px;
+                                                    background: linear-gradient(135deg, #2D31FA 0%, #1a1d8f 100%);
+                                                    color:#fff;
+                                                    border:none;
+                                                    border-radius:12px;
+                                                    font-size:16px;
+                                                    font-weight:600;
+                                                    cursor:pointer;
+                                                    transition:all 0.3s ease;
+                                                    letter-spacing:0.5px;
+                                                " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 25px rgba(45,49,250,0.35)'"
+                                                    onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+                                                    <i class="fa-regular fa-calendar-check"
+                                                        style="margin-right:8px;"></i>
                                                     Schedule My Free Demo
                                                 </button>
+                                            </div>
+                                            <div class="col-lg-12" style="text-align:center;padding-top:4px;">
+                                                <p style="color:#999;font-size:12px;margin:0;">
+                                                    <i class="fa-solid fa-lock" style="margin-right:4px;"></i>
+                                                    Your information is 100% secure. No spam, ever.
+                                                </p>
                                             </div>
                                         </div>
                                     </form>
@@ -329,6 +600,7 @@
                     </div>
                 </div>
             </section>
+
 
             <!-- Gt Footer Section Start -->
             <section class="gt-footer-section-3 footer-3">

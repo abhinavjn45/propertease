@@ -10,7 +10,7 @@
     // ──────────────────────────── CONFIG ────────────────────────────
     const CONFIG = {
         apiKey: window.PROPERTEASE_GEMINI_KEY || '',
-        model: 'gemini-2.0-flash',
+        model: 'gemini-2.0-flash-lite',
         knowledgeBasePath: null,       // auto-detected
         topK: 3,                       // chunks to retrieve
         maxHistory: 6,                 // conversation pairs to keep
@@ -150,21 +150,21 @@
         const systemPrompt = `You are the Propert-Ease AI Assistant — a friendly, knowledgeable support bot for the Propert-Ease society governance platform.
 
 RULES:
-- Answer ONLY based on the provided knowledge base context. If the answer is not in the context, say you'll connect them with the team.
-- Be concise, helpful, and professional. Use bullet points for lists.
-- Never make up features, pricing, or capabilities that aren't in the context.
-- If asked about pricing specifics (numbers), say "Contact our sales team for detailed pricing" as plans are customized.
-- Always encourage booking a free demo for detailed discussions.
-- Keep responses under 150 words unless the question needs more detail.
-- Use a warm, professional tone suitable for Indian housing society committees.
+1. For questions about Propert-Ease, housing societies, governance, compliance, billing, maintenance, or related topics — answer helpfully using the provided knowledge base context below. You may elaborate naturally.
+2. If the user's question is about Propert-Ease but the exact answer isn't in the context, give a helpful general answer and suggest they book a free demo or contact support@propertease.in for specifics.
+3. ONLY if the question is COMPLETELY IRRELEVANT to Propert-Ease or housing/society management (e.g. weather, sports, cooking, movies, coding, math) — politely say: "I'm specialized in Propert-Ease and society governance. For this question, I'd recommend checking other resources. Is there anything about Propert-Ease I can help with?"
+4. Be concise, helpful, and professional. Use bullet points for lists.
+5. Never fabricate specific pricing numbers — say pricing is customized and suggest contacting sales.
+6. Keep responses under 150 words unless more detail is needed.
+7. Use a warm, professional tone suitable for Indian housing society committees.
 ${context}`;
 
         return systemPrompt;
     }
 
-    /** Send message to Gemini API */
-    async function callGemini(query, chunks) {
-        if (!CONFIG.apiKey) {
+    /** Send message to Gemini API with retry for rate limits */
+    async function callGemini(query, chunks, retryCount = 0) {
+        if (!CONFIG.apiKey || CONFIG.apiKey === 'YOUR_GEMINI_API_KEY_HERE') {
             return "⚠️ API key not configured. Please set your Gemini API key to enable the chatbot.";
         }
 
@@ -206,12 +206,27 @@ ${context}`;
             });
 
             if (!response.ok) {
-                const err = await response.json();
-                console.error('Gemini API error:', err);
-                if (response.status === 429) {
-                    return "I'm getting a lot of questions right now! Please try again in a moment. 😊";
+                const err = await response.json().catch(() => ({}));
+                console.error('Gemini API error:', response.status, err);
+
+                // Rate limit — retry up to 2 times with delay
+                if (response.status === 429 && retryCount < 2) {
+                    const delay = (retryCount + 1) * 2000; // 2s, 4s
+                    console.log(`[Chatbot] Rate limited, retrying in ${delay}ms...`);
+                    await new Promise(r => setTimeout(r, delay));
+                    return callGemini(query, chunks, retryCount + 1);
                 }
-                return "Sorry, I'm having trouble connecting. Please try again later or contact us at support@propertease.in.";
+
+                if (response.status === 429) {
+                    return "I'm experiencing high traffic right now. Please wait a few seconds and try again! 😊";
+                }
+                if (response.status === 400) {
+                    return "I couldn't process that request. Could you try rephrasing your question?";
+                }
+                if (response.status === 403) {
+                    return "⚠️ API key issue. Please check that your Gemini API key is valid.";
+                }
+                return "Sorry, I'm having trouble connecting. Please try again or contact us at support@propertease.in.";
             }
 
             const data = await response.json();

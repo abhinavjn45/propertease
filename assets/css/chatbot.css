@@ -1,0 +1,417 @@
+/* ============================================================
+   Propert-Ease RAG Chatbot — Widget Styles
+   ============================================================ */
+
+/* ── Variables ── */
+:root {
+    --pe-primary: #2D31FA;
+    --pe-primary-dark: #1a1d8f;
+    --pe-primary-light: rgba(45, 49, 250, 0.08);
+    --pe-bg-light: #f8f9fc;
+    --pe-text-dark: #1a1a2e;
+    --pe-text-muted: #6b7280;
+    --pe-border: #e5e7eb;
+    --pe-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    --pe-radius: 20px;
+}
+
+/* ── FAB (Floating Action Button) ── */
+#pe-chat-fab {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pe-primary), var(--pe-primary-dark));
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(45, 49, 250, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10000;
+}
+
+#pe-chat-fab:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 30px rgba(45, 49, 250, 0.5);
+}
+
+#pe-fab-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--pe-primary);
+    opacity: 0.4;
+    animation: pePulse 2s ease-out infinite;
+    pointer-events: none;
+}
+
+@keyframes pePulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: scale(1.6);
+        opacity: 0;
+    }
+}
+
+/* ── Chat Window ── */
+#pe-chat-window {
+    position: fixed;
+    bottom: 100px;
+    right: 28px;
+    width: 400px;
+    max-height: 580px;
+    border-radius: var(--pe-radius);
+    background: #fff;
+    box-shadow: var(--pe-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 10001;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#pe-chat-window.pe-chat-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+/* ── Header ── */
+#pe-chat-header {
+    background: linear-gradient(135deg, var(--pe-primary), var(--pe-primary-dark));
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+#pe-chat-header-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#pe-chat-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    backdrop-filter: blur(10px);
+}
+
+#pe-chat-title {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
+}
+
+#pe-chat-status {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#pe-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #34d399;
+    display: inline-block;
+    animation: peStatusPulse 2s ease-in-out infinite;
+}
+
+@keyframes peStatusPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+#pe-chat-minimize {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+#pe-chat-minimize:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ── Messages Area ── */
+#pe-chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 250px;
+    max-height: 300px;
+    background: var(--pe-bg-light);
+    scroll-behavior: smooth;
+}
+
+#pe-chat-messages::-webkit-scrollbar {
+    width: 5px;
+}
+
+#pe-chat-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#pe-chat-messages::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 10px;
+}
+
+/* ── Messages ── */
+.pe-message {
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.pe-message.pe-msg-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pe-message-user {
+    align-items: flex-end;
+}
+
+.pe-message-bot {
+    align-items: flex-start;
+}
+
+.pe-bubble {
+    padding: 12px 16px;
+    border-radius: 16px;
+    max-width: 85%;
+    font-size: 14px;
+    line-height: 1.6;
+    word-wrap: break-word;
+}
+
+.pe-message-user .pe-bubble {
+    background: linear-gradient(135deg, var(--pe-primary), var(--pe-primary-dark));
+    color: #fff;
+    border-bottom-right-radius: 4px;
+}
+
+.pe-message-bot .pe-bubble {
+    background: #fff;
+    color: var(--pe-text-dark);
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.pe-message-bot .pe-bubble strong {
+    color: var(--pe-primary);
+}
+
+.pe-message-bot .pe-bubble code {
+    background: var(--pe-primary-light);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--pe-primary-dark);
+}
+
+.pe-msg-time {
+    font-size: 10px;
+    color: var(--pe-text-muted);
+    margin-top: 4px;
+    padding: 0 4px;
+}
+
+/* ── Typing Indicator ── */
+.pe-typing-bubble {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 14px 20px !important;
+}
+
+.pe-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #b0b3b8;
+    animation: peDotBounce 1.4s ease-in-out infinite;
+}
+
+.pe-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.pe-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes peDotBounce {
+
+    0%,
+    60%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+
+    30% {
+        transform: translateY(-6px);
+        opacity: 1;
+    }
+}
+
+/* ── Quick Actions ── */
+#pe-quick-actions {
+    padding: 8px 16px 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    background: var(--pe-bg-light);
+    border-top: 1px solid var(--pe-border);
+}
+
+.pe-quick-btn {
+    padding: 6px 14px;
+    border-radius: 50px;
+    border: 1.5px solid var(--pe-border);
+    background: #fff;
+    color: var(--pe-text-dark);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.pe-quick-btn:hover {
+    border-color: var(--pe-primary);
+    color: var(--pe-primary);
+    background: var(--pe-primary-light);
+}
+
+/* ── Input Area ── */
+#pe-chat-input-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--pe-border);
+    background: #fff;
+}
+
+#pe-chat-input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1.5px solid var(--pe-border);
+    border-radius: 12px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    background: var(--pe-bg-light);
+    color: var(--pe-text-dark);
+}
+
+#pe-chat-input:focus {
+    border-color: var(--pe-primary);
+}
+
+#pe-chat-input::placeholder {
+    color: #9ca3af;
+}
+
+#pe-chat-send {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--pe-primary), var(--pe-primary-dark));
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+#pe-chat-send:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(45, 49, 250, 0.3);
+}
+
+/* ── Footer ── */
+#pe-chat-footer {
+    padding: 8px 16px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--pe-text-muted);
+    background: #fff;
+    border-top: 1px solid var(--pe-border);
+}
+
+#pe-chat-footer strong {
+    color: var(--pe-primary);
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    #pe-chat-window {
+        width: calc(100vw - 20px);
+        right: 10px;
+        bottom: 90px;
+        max-height: 70vh;
+        border-radius: 16px;
+    }
+
+    #pe-chat-fab {
+        bottom: 20px;
+        right: 20px;
+        width: 54px;
+        height: 54px;
+    }
+
+    #pe-chat-messages {
+        min-height: 200px;
+    }
+}

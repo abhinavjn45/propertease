@@ -1,0 +1,127 @@
+[
+    {
+        "id": 1,
+        "title": "What is Propert-Ease?",
+        "content": "Propert-Ease is a comprehensive digital governance platform designed for Residential Housing Societies, Co-operative Societies, and Apartment Complexes in India. It serves as the Digital Charter of Indian Housing, helping Management Committees automate compliance, accounting, communication, and day-to-day operations. Propert-Ease replaces manual registers, paper notices, and spreadsheet-based accounting with a single unified platform."
+    },
+    {
+        "id": 2,
+        "title": "Core Mission and Vision",
+        "content": "Propert-Ease's mission is to bring transparency, accountability, and digital transformation to residential society governance in India. The vision is to become the trusted digital backbone for every housing society, ensuring statutory compliance, financial transparency, and resident satisfaction. We believe every society deserves professional-grade management tools regardless of size."
+    },
+    {
+        "id": 3,
+        "title": "Statutory Compliance Management",
+        "content": "Propert-Ease automates statutory compliance for housing societies under the Maharashtra Co-operative Societies Act, RCS (Registrar of Co-operative Societies) regulations, and RERA guidelines. Features include automatic generation of I-forms, J-forms, annual audit reports, society registration renewals, and compliance calendars with deadline reminders. The system ensures societies never miss a filing deadline."
+    },
+    {
+        "id": 4,
+        "title": "Society Accounting and Finance",
+        "content": "The accounting module handles maintenance bill generation, collection tracking, receipt issuing, and defaulter management. It supports sinking fund, repair fund, and parking fund tracking as per statutory requirements. Features include automated GST calculations, bank reconciliation, budget vs actuals reporting, and year-end audit-ready financial statements. The system generates balance sheets, income-expenditure statements, and trial balances."
+    },
+    {
+        "id": 5,
+        "title": "Maintenance Bill Management",
+        "content": "Propert-Ease generates maintenance bills automatically every month based on predefined rate structures. It supports flat-wise customization, area-based billing, and multiple charge heads like maintenance, sinking fund, parking, water, and non-occupancy charges. Bills are sent via email and WhatsApp to members. The system tracks payments, sends payment reminders, and generates defaulter reports."
+    },
+    {
+        "id": 6,
+        "title": "Meeting Management",
+        "content": "The meeting management module helps societies conduct Annual General Meetings (AGMs), Special General Meetings (SGMs), and Committee Meetings digitally. Features include agenda creation, notice circulation to all members, quorum tracking, minutes recording, resolution tracking, and e-voting for resolutions. All meeting records are stored digitally for future reference and audit purposes."
+    },
+    {
+        "id": 7,
+        "title": "Visitor and Gate Management",
+        "content": "Propert-Ease includes a visitor management system for societies. Security staff can log visitor entries with photo capture, vehicle details, and in/out timestamps. Residents receive real-time notifications when visitors arrive. The system maintains a visitor log, supports pre-approved visitor lists, and generates security reports. Delivery tracking for parcels and daily help (maid, driver) attendance is also supported."
+    },
+    {
+        "id": 8,
+        "title": "Complaint and Helpdesk System",
+        "content": "Residents can raise complaints and service requests through the platform. Categories include plumbing, electrical, security, housekeeping, and common area issues. The helpdesk tracks complaint status (open, in-progress, resolved), assigns complaints to staff or vendors, and sends status updates to residents. Analytics dashboards show complaint trends, resolution times, and satisfaction scores."
+    },
+    {
+        "id": 9,
+        "title": "Communication and Notices",
+        "content": "Propert-Ease provides a digital notice board and communication hub for societies. Management committees can post notices, circulars, and announcements visible to all members. Communication channels include in-app notifications, email, SMS, and WhatsApp integration. The platform supports document sharing for AGM agendas, financial reports, and society bylaws. A community forum allows residents to discuss topics."
+    },
+    {
+        "id": 10,
+        "title": "Member and Flat Directory",
+        "content": "The platform maintains a comprehensive directory of all society members, tenants, and flats. It includes owner details, tenant information, family member records, vehicle registrations, and parking allotments. The directory supports transfer of ownership tracking, NOC generation for flat sales, and share certificate management. Privacy controls let members choose what information is visible to others."
+    },
+    {
+        "id": 11,
+        "title": "Document Management",
+        "content": "Propert-Ease provides secure cloud storage for all society documents including registration certificates, bylaws, audit reports, meeting minutes, NOCs, legal notices, and vendor contracts. Documents are organized by category and year. Access controls ensure only authorized committee members can upload or manage documents, while members can view relevant documents. All documents are backed up and encrypted."
+    },
+    {
+        "id": 12,
+        "title": "Pricing Plans",
+        "content": "Propert-Ease offers three pricing plans: 1) Starter Plan for small societies (up to 50 flats) which includes basic accounting, maintenance billing, and compliance features. 2) Professional Plan for medium societies (50-200 flats) adding meeting management, visitor management, helpdesk, and advanced reporting. 3) Enterprise Plan for large societies (200+ flats) with all features, dedicated account manager, custom integrations, and priority support. All plans include free data migration and onboarding support. Contact our sales team for detailed pricing."
+    },
+    {
+        "id": 13,
+        "title": "Onboarding Process",
+        "content": "Getting started with Propert-Ease is simple and takes just 48 hours. Step 1: Book a free compliance demo through our website. Step 2: Our team analyzes your society's current processes and data. Step 3: We migrate your existing data (member details, accounts, documents) at no extra cost. Step 4: We train your committee members and staff on the platform. Step 5: Go live with ongoing support. The entire onboarding is white-glove, meaning our team handles everything."
+    },
+    {
+        "id": 14,
+        "title": "Data Security and Privacy",
+        "content": "Propert-Ease takes data security seriously. All data is encrypted at rest and in transit using AES-256 encryption. The platform is hosted on secure cloud infrastructure with 99.9% uptime guarantee. Regular automated backups ensure data safety. We comply with Indian data protection regulations. Role-based access controls ensure only authorized users can access sensitive information. We never share society data with third parties."
+    },
+    {
+        "id": 15,
+        "title": "Customer Support",
+        "content": "Propert-Ease provides dedicated customer support through multiple channels. Support is available via email, phone, WhatsApp, and in-app chat during business hours (9 AM to 7 PM IST, Monday to Saturday). Enterprise plan customers get a dedicated account manager and priority support with a 2-hour response SLA. We also provide training sessions, video tutorials, and a knowledge base for self-service support."
+    },
+    {
+        "id": 16,
+        "title": "Mobile App",
+        "content": "Propert-Ease is available as a mobile app for both Android and iOS platforms, in addition to the web dashboard. Residents can view and pay maintenance bills, raise complaints, view notices, approve visitors, and participate in polls through the mobile app. Committee members can approve payments, view reports, and manage operations on the go. The app sends push notifications for important updates."
+    },
+    {
+        "id": 17,
+        "title": "Custom Domain and Branding",
+        "content": "Each society on Propert-Ease gets its own custom-branded portal. Societies can use their own domain name (e.g., mysociety.propertease.in) and customize the portal with their society logo and colors. This gives each society a professional digital identity. The branded portal can be shared with residents for easy access to all society services."
+    },
+    {
+        "id": 18,
+        "title": "Vendor and Staff Management",
+        "content": "Propert-Ease helps societies manage their vendors and staff efficiently. The module tracks vendor contracts, work orders, AMC renewals, and payment schedules. For society staff (security guards, housekeeping, gardeners), it manages attendance, shift scheduling, and payroll. Performance tracking and vendor ratings help societies make informed decisions about renewals."
+    },
+    {
+        "id": 19,
+        "title": "Facility and Amenity Booking",
+        "content": "Residents can book society amenities and common facilities through the platform. Supported facilities include clubhouse, community hall, swimming pool, gym, sports courts, and guest rooms. The system manages availability calendars, booking rules (advance booking period, cancellation policy), and fee collection. Conflict-free scheduling ensures no double bookings."
+    },
+    {
+        "id": 20,
+        "title": "Election and Voting Module",
+        "content": "Propert-Ease supports digital elections for Management Committee positions. The module handles candidate nominations, voter eligibility verification, secure e-voting with anonymity, and result declaration. It follows the guidelines prescribed by the Registrar of Co-operative Societies. The platform also supports online polls and surveys for community decisions like rule changes, amenity upgrades, and festival planning."
+    },
+    {
+        "id": 21,
+        "title": "Reporting and Analytics",
+        "content": "Comprehensive dashboards and reports provide insights into society operations. Available reports include financial summaries, maintenance collection status, defaulter analysis, expense breakdowns, complaint resolution metrics, and occupancy statistics. Reports can be exported to PDF and Excel formats. The analytics dashboard gives committee members a real-time overview of society health with key metrics and trends."
+    },
+    {
+        "id": 22,
+        "title": "Integration Capabilities",
+        "content": "Propert-Ease integrates with popular payment gateways for online maintenance payments including Razorpay, PayU, and bank NEFT/RTGS. It also integrates with Tally for accounting sync, WhatsApp Business API for communication, and SMS gateways for notifications. API access is available on the Enterprise plan for custom integrations with other society management tools."
+    },
+    {
+        "id": 23,
+        "title": "Legal Compliance Details",
+        "content": "Propert-Ease is designed to comply with the Maharashtra Co-operative Societies Act 1960, Model Bye-Laws 2011, RERA Act 2016, and GST regulations. The platform auto-generates all statutory forms required by the Registrar including Form I (Annual Return), Form J (Audit Report), and various NOC formats. It keeps track of regulatory changes and updates the platform accordingly."
+    },
+    {
+        "id": 24,
+        "title": "Why Choose Propert-Ease",
+        "content": "Societies choose Propert-Ease because: 1) It's purpose-built for Indian housing societies, not a generic property management tool. 2) Complete statutory compliance automation saves 100+ hours annually. 3) Transparent financial management reduces disputes. 4) Digital communication improves resident engagement. 5) 48-hour go-live with free data migration. 6) Trusted by 500+ societies. 7) 99.9% uptime with enterprise-grade security. 8) Dedicated support team that understands housing society operations."
+    },
+    {
+        "id": 25,
+        "title": "Contact Information",
+        "content": "You can reach Propert-Ease through multiple channels. Email: support@propertease.in. Phone: +91 98765 43210. Visit our website at propertease.in to book a free compliance demo. Our office is open Monday to Saturday, 9 AM to 7 PM IST. For partnership or integration inquiries, email partners@propertease.in. Follow us on LinkedIn, Twitter, and Instagram for updates."
+    }
+]

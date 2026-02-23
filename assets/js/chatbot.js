@@ -10,7 +10,7 @@
     // ──────────────────────────── CONFIG ────────────────────────────
     const CONFIG = {
         apiKey: window.PROPERTEASE_GEMINI_KEY || '',
-        models: ['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-1.5-pro'],  // fallback chain
+        models: ['gemini-2.5-flash-preview-05-20', 'gemini-2.5-flash'],  // available models for this API key
         knowledgeBasePath: null,       // auto-detected
         topK: 3,                       // chunks to retrieve
         maxHistory: 6,                 // conversation pairs to keep

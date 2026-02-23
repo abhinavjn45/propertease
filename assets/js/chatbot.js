@@ -10,7 +10,7 @@
     // ──────────────────────────── CONFIG ────────────────────────────
     const CONFIG = {
         apiKey: window.PROPERTEASE_GEMINI_KEY || '',
-        model: 'gemini-2.0-flash-lite',
+        models: ['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-1.5-pro'],  // fallback chain
         knowledgeBasePath: null,       // auto-detected
         topK: 3,                       // chunks to retrieve
         maxHistory: 6,                 // conversation pairs to keep
@@ -23,6 +23,7 @@
     let chatHistory = [];
     let isOpen = false;
     let isTyping = false;
+    let workingModel = CONFIG.models[0]; // track which model works
 
     // ──────────────────────────── UTILITIES ────────────────────────────
 
@@ -162,8 +163,38 @@ ${context}`;
         return systemPrompt;
     }
 
-    /** Send message to Gemini API with retry for rate limits */
-    async function callGemini(query, chunks, retryCount = 0) {
+    /** Try a single API call with a specific model */
+    async function tryGeminiCall(modelName, systemPrompt, contents) {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${CONFIG.apiKey}`;
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                system_instruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+                contents: contents,
+                generationConfig: {
+                    temperature: 0.7,
+                    maxOutputTokens: 500,
+                }
+            })
+        });
+
+        if (!response.ok) {
+            const err = await response.json().catch(() => ({}));
+            throw { status: response.status, body: err };
+        }
+
+        const data = await response.json();
+        const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!text) throw { status: 0, body: 'Empty response' };
+        return text;
+    }
+
+    /** Send message to Gemini API — tries multiple models with retry */
+    async function callGemini(query, chunks) {
         if (!CONFIG.apiKey || CONFIG.apiKey === 'YOUR_GEMINI_API_KEY_HERE') {
             return "⚠️ API key not configured. Please set your Gemini API key to enable the chatbot.";
         }
@@ -172,71 +203,51 @@ ${context}`;
 
         // Build contents array with history
         const contents = [];
-
-        // Add conversation history
         chatHistory.forEach(msg => {
             contents.push({
                 role: msg.role === 'user' ? 'user' : 'model',
                 parts: [{ text: msg.text }]
             });
         });
+        contents.push({ role: 'user', parts: [{ text: query }] });
 
-        // Add current query
-        contents.push({
-            role: 'user',
-            parts: [{ text: query }]
-        });
+        // Try the working model first, then fallbacks
+        const modelsToTry = [workingModel, ...CONFIG.models.filter(m => m !== workingModel)];
+        let lastError = null;
 
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${CONFIG.model}:generateContent?key=${CONFIG.apiKey}`;
+        for (const model of modelsToTry) {
+            // Try up to 2 times per model (with delay on 429)
+            for (let attempt = 0; attempt < 2; attempt++) {
+                try {
+                    console.log(`[Chatbot] Trying model: ${model} (attempt ${attempt + 1})`);
+                    const text = await tryGeminiCall(model, systemPrompt, contents);
+                    workingModel = model; // remember which model worked
+                    console.log(`[Chatbot] Success with model: ${model}`);
+                    return text;
+                } catch (err) {
+                    lastError = err;
+                    console.warn(`[Chatbot] ${model} failed (${err.status}):`, err.body);
 
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    system_instruction: {
-                        parts: [{ text: systemPrompt }]
-                    },
-                    contents: contents,
-                    generationConfig: {
-                        temperature: 0.7,
-                        maxOutputTokens: 500,
+                    if (err.status === 429 && attempt === 0) {
+                        // Rate limited — wait and retry same model
+                        console.log(`[Chatbot] Rate limited, waiting 3s...`);
+                        await new Promise(r => setTimeout(r, 3000));
+                        continue;
                     }
-                })
-            });
-
-            if (!response.ok) {
-                const err = await response.json().catch(() => ({}));
-                console.error('Gemini API error:', response.status, err);
-
-                // Rate limit — retry up to 2 times with delay
-                if (response.status === 429 && retryCount < 2) {
-                    const delay = (retryCount + 1) * 2000; // 2s, 4s
-                    console.log(`[Chatbot] Rate limited, retrying in ${delay}ms...`);
-                    await new Promise(r => setTimeout(r, delay));
-                    return callGemini(query, chunks, retryCount + 1);
+                    break; // try next model
                 }
-
-                if (response.status === 429) {
-                    return "I'm experiencing high traffic right now. Please wait a few seconds and try again! 😊";
-                }
-                if (response.status === 400) {
-                    return "I couldn't process that request. Could you try rephrasing your question?";
-                }
-                if (response.status === 403) {
-                    return "⚠️ API key issue. Please check that your Gemini API key is valid.";
-                }
-                return "Sorry, I'm having trouble connecting. Please try again or contact us at support@propertease.in.";
             }
-
-            const data = await response.json();
-            const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-            return text || "I couldn't generate a response. Please try rephrasing your question!";
-
-        } catch (error) {
-            console.error('Chatbot API error:', error);
-            return "Connection error. Please check your internet and try again.";
         }
+
+        // All models failed
+        console.error('[Chatbot] All models failed. Last error:', lastError);
+        if (lastError?.status === 429) {
+            return "I'm experiencing high traffic right now. Please wait a few seconds and try again! 😊";
+        }
+        if (lastError?.status === 403) {
+            return "⚠️ API key issue. Please verify your Gemini API key at https://aistudio.google.com/apikey";
+        }
+        return "Sorry, I'm having trouble connecting. Please try again or contact us at support@propertease.in.";
     }
 
     // ──────────────────────────── CHAT UI ────────────────────────────

@@ -165,6 +165,24 @@ ${context}`;
 
     /** Try a single API call with a specific model */
     async function tryGeminiCall(modelName, systemPrompt, contents) {
+        // First, try the secure proxy (Vercel deployment)
+        try {
+            const proxyResponse = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ modelName, systemPrompt, contents })
+            });
+
+            if (proxyResponse.ok) {
+                const data = await proxyResponse.json();
+                const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (text) return text;
+            }
+        } catch (e) {
+            console.warn('[Chatbot] Proxy unavailable, falling back to client-side call.');
+        }
+
+        // Fallback: Direct client-side call (local development)
         const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${CONFIG.apiKey}`;
 
         const response = await fetch(url, {

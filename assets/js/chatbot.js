@@ -213,10 +213,6 @@ ${context}`;
 
     /** Send message to Gemini API — tries multiple models with retry */
     async function callGemini(query, chunks) {
-        if (!CONFIG.apiKey || CONFIG.apiKey === 'YOUR_GEMINI_API_KEY_HERE') {
-            return "⚠️ **Chatbot Configuration Required**: Please copy `assets/js/config.example.js` to `assets/js/config.js` and add your **Gemini API Key**. See `README.md` for details.";
-        }
-
         const systemPrompt = buildPrompt(query, chunks);
 
         // Build contents array with history
@@ -259,6 +255,15 @@ ${context}`;
 
         // All models failed
         console.error('[Chatbot] All models failed. Last error:', lastError);
+
+        // Specific guidance for missing configuration
+        if (!CONFIG.apiKey || CONFIG.apiKey === 'YOUR_GEMINI_API_KEY_HERE') {
+            if (lastError?.body?.error?.includes('not configured on server')) {
+                return "⚠️ **Vercel Configuration Required**: Please add `GEMINI_API_KEY` to your Vercel Environment Variables.";
+            }
+            return "⚠️ **Local Configuration Required**: Please copy `assets/js/config.example.js` to `assets/js/config.js` and add your **Gemini API Key**.";
+        }
+
         if (lastError?.status === 429) {
             return "I'm experiencing high traffic right now. Please wait a few seconds and try again! 😊";
         }

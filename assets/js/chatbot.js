@@ -196,7 +196,7 @@ ${context}`;
     /** Send message to Gemini API — tries multiple models with retry */
     async function callGemini(query, chunks) {
         if (!CONFIG.apiKey || CONFIG.apiKey === 'YOUR_GEMINI_API_KEY_HERE') {
-            return "⚠️ API key not configured. Please set your Gemini API key to enable the chatbot.";
+            return "⚠️ **Chatbot Configuration Required**: Please copy `assets/js/config.example.js` to `assets/js/config.js` and add your **Gemini API Key**. See `README.md` for details.";
         }
 
         const systemPrompt = buildPrompt(query, chunks);

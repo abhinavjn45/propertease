@@ -265,7 +265,7 @@
         global $con;
 
         echo "
-            <img src='" . get_site_option('site_url') . "/assets/images/logos/" . htmlspecialchars(get_site_option('logo')) . "' alt='" . htmlspecialchars(get_site_option('site_title')) . " Logo' class='brand-logo' onclick='window.location.href=\"" . get_site_option('site_url') . "\"' style='cursor: pointer;'>
+            <img src='" . get_site_option('site_url') . "assets/images/logos/" . htmlspecialchars(get_site_option('logo')) . "' alt='" . htmlspecialchars(get_site_option('site_title')) . " Logo' class='brand-logo' onclick='window.location.href=\"" . get_site_option('site_url') . "\"' style='cursor: pointer;'>
             <div class='brand-text'>
         ";
 

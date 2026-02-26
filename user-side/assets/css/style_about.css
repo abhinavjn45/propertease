@@ -1,0 +1,306 @@
+/* About page specific styles */
+
+/* Society Overview */
+.section-text {
+  font-size: 0.9rem;
+  color: #283555;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+/* Committee members list */
+.committee-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.committee-member {
+  background: #ffffff;
+  border-radius: 0.7rem;
+  padding: 1rem;
+  border: 1px solid #d3def8;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.committee-member:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(11, 60, 138, 0.12);
+}
+
+.member-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0b3c8a, #0a58ca);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  border: 3px solid #ffc107;
+}
+
+.member-info {
+  flex: 1 1 auto;
+}
+
+.member-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #122142;
+  margin-bottom: 0.1rem;
+}
+
+.member-role {
+  font-size: 0.8rem;
+  color: #6c7aa5;
+  margin-bottom: 0.25rem;
+}
+
+.member-contact {
+  font-size: 0.75rem;
+  color: #4d5c82;
+}
+
+/* Vision/Mission boxes */
+.vision-mission-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.vm-box {
+  background: #ffffff;
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  border: 1px solid #d3def8;
+  position: relative;
+  overflow: hidden;
+}
+
+.vm-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: #0b3c8a;
+}
+
+.vm-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #0b3c8a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.vm-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #122142;
+  margin-bottom: 0.5rem;
+}
+
+.vm-text {
+  font-size: 0.9rem;
+  color: #283555;
+  line-height: 1.6;
+}
+
+/* Facilities grid */
+.facilities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.9rem;
+}
+
+.facility-item {
+  background: #ffffff;
+  border-radius: 0.7rem;
+  padding: 1rem;
+  border: 1px solid #d3def8;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: background-color 0.2s ease;
+}
+
+.facility-item:hover {
+  background: #f8fbff;
+}
+
+.facility-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #0b3c8a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.facility-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #122142;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #d3def8;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -1.5rem;
+  top: 0.3rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #0b3c8a;
+  border: 3px solid #f2f6ff;
+}
+
+.timeline-year {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0b3c8a;
+  margin-bottom: 0.2rem;
+}
+
+.timeline-event {
+  font-size: 0.9rem;
+  color: #283555;
+  line-height: 1.5;
+}
+
+/* Bye-laws list */
+.bylaws-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.bylaws-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.6rem;
+  background: #ffffff;
+  border: 1px solid #d3def8;
+  margin-bottom: 0.6rem;
+  transition: border-color 0.2s ease;
+}
+
+.bylaws-item:hover {
+  border-color: #0a58ca;
+}
+
+.bylaws-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #0b3c8a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.bylaws-text {
+  flex: 1 1 auto;
+  font-size: 0.9rem;
+  color: #283555;
+  padding-top: 0.3rem;
+}
+
+/* Hero section overrides for About page */
+.hero-section {
+  background: linear-gradient(135deg, #0b3c8a 0%, #122142 45%, #0b3c8a 100%);
+  color: #ffffff;
+  padding: 2rem 1rem 2rem;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.hero-breadcrumb {
+  font-size: 0.8rem;
+  margin-bottom: 0.75rem;
+  color: #c7d8ff;
+}
+
+.hero-breadcrumb a {
+  color: #ffc107;
+  text-decoration: none;
+}
+
+.hero-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+/* Section card overrides for About page */
+.section-card {
+  background: #f2f6ff;
+  border-radius: 0.9rem;
+  padding: 1.5rem 1.5rem 1.5rem;
+  border: 1px solid #d3def8;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 14px rgba(11, 60, 138, 0.08);
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #122142;
+  border-left: 4px solid #0b3c8a;
+  padding-left: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 575.98px) {
+  .timeline {
+    padding-left: 1.5rem;
+  }
+}

@@ -1,0 +1,86 @@
+/* Header */
+header.site-header {
+  background: #f2f6ff;
+  border-bottom: 1px solid #d0ddff;
+}
+
+.brand-block {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  gap: 0.75rem;
+}
+
+.brand-logo {
+  height: 52px;
+  width: auto;
+  max-width: 60px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.brand-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #122142;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.brand-tagline {
+  font-size: 0.9rem;
+  color: #3b4b73;
+}
+
+.brand-ministry {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6c7aa5;
+  font-weight: 600;
+}
+
+/* Navbar overrides to feel gov-style */
+.main-navbar {
+  background-color: #0b3c8a;
+}
+
+.navbar-brand-text {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.navbar-nav .nav-link {
+  color: #e3ebff !important;
+  font-weight: 500;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  font-size: 0.9rem;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus,
+.navbar-nav .nav-link.active {
+  color: #ffc107 !important;
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.navbar-toggler-icon {
+  filter: invert(1);
+}
+
+@media (max-width: 575.98px) {
+  .brand-block {
+    padding-inline: 0.75rem;
+  }
+}

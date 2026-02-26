@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en" style="height: 100%;">
+  <head>
+    <meta charset="UTF-8">
+    <title>Online Services - Society Information Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="assets/css/style_online-services.css">
+    <link rel="stylesheet" href="assets/css/login-modal.css">
+  </head>
+  <body>
+    <div class="app-wrapper">
+      <!-- Global components injected via JS -->
+      <header>
+        <div id="topbar-container"></div>
+        <div id="header-container"></div>
+        <div id="navbar-container"></div>
+      </header>
+
+      <!-- Hero Section -->
+      <section class="hero-section" aria-labelledby="page-title">
+        <div class="hero-inner">
+          <div class="hero-breadcrumb">
+            <a href="index.html">Home</a>
+            /
+            <span id="page-title">Online Services</span>
+          </div>
+          <h2 class="hero-title" id="hero-heading">Online Services Portal</h2>
+          <p class="hero-subtitle" id="hero-subheading">Access convenient online services for payments, applications, facility bookings, and more. Complete transactions securely from the comfort of your home, 24/7.</p>
+        </div>
+      </section>
+
+      <!-- Main Content -->
+      <main aria-label="Online services">
+        <div class="main-inner">
+          <!-- Payment Services -->
+          <section class="category-section">
+            <div class="category-header">
+              <div class="category-icon" aria-hidden="true"><i class="fas fa-credit-card"></i></div>
+              <h3 class="category-title">Payment Services</h3>
+            </div>
+            <div class="services-grid">
+              <div class="service-card" data-service="payment">
+                <div class="service-card-icon" aria-hidden="true"><i class="fas fa-indian-rupee-sign"></i></div>
+                <h4 class="service-card-title" id="payment-service-title">Pay Maintenance Charges</h4>
+                <p class="service-card-desc">Make monthly maintenance payments online via UPI, net banking, or credit/debit card.</p>
+                <span class="service-card-status status-available">Available</span>
+              </div>
+              <div class="service-card" data-service="coming-soon">
+                <div class="service-card-icon" aria-hidden="true"><i class="fas fa-receipt"></i></div>
+                <h4 class="service-card-title">View Payment History</h4>
+                <p class="service-card-desc">Access your complete payment history and download receipts for past transactions.</p>
+                <span class="service-card-status status-coming-soon">Coming Soon</span>
+              </div>
+              <div class="service-card" data-service="coming-soon">
+                <div class="service-card-icon" aria-hidden="true"><i class="fas fa-chart-bar"></i></div>
+                <h4 class="service-card-title">Outstanding Dues</h4>
+                <p class="service-card-desc">Check your outstanding dues, pending payments, and payment deadlines.</p>
+                <span class="service-card-status status-coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Application Services -->
+          <section class="category-section">
+            <div class="category-header">
+              <div class="category-icon" aria-hidden="true"><i class="fas fa-edit"></i></div>
+              <h3 class="category-title">Applications &amp; Requests</h3>
+            </div>
+            <div class="services-grid">
+              <div class="service-card" data-service="complaint">
+                <div class="service-card-icon" aria-hidden="true"><i class="fas fa-tools"></i></div>
+                <h4 class="service-card-title" id="complaint-service-title">Register Complaint</h4>
+                <p class="service-card-desc">Submit maintenance requests, complaints, or report issues that need attention.</p>
+                <span class="service-card-status status-available">Available</span>
+              </div>
+              <div class="service-card" data-service="booking">
+                <div class="service-card-icon" aria-hidden="true"><i class="fas fa-building"></i></div>
+                <h4 class="service-card-title" id="booking-service-title">Book Community Hall</h4>
+                <p class="service-card-desc">Reserve the community hall for events, functions, or gatherings.</p>
+                <span class="service-card-status status-available">Available</span>
+              </div>
+              <div class="service-card" data-service="coming-soon">
+                <div class="service-card-icon" aria-hidden="true"><i class="fas fa-car"></i></div>
+                <h4 class="service-card-title">Visitor Pass Request</h4>
+                <p class="service-card-desc">Request temporary visitor passes or vehicle entry permits in advance.</p>
+                <span class="service-card-status status-coming-soon">Coming Soon</span>
+              </div>
+              <div class="service-card" data-service="coming-soon">
+                <div class="service-card-icon" aria-hidden="true"><i class="fas fa-file-alt"></i></div>
+                <h4 class="service-card-title">NOC Application</h4>
+                <p class="service-card-desc">Apply for No Objection Certificate for renovations or other purposes.</p>
+                <span class="service-card-status status-coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Information Services -->
+          <section class="category-section">
+            <div class="category-header">
+              <div class="category-icon" aria-hidden="true">ℹ️</div>
+              <h3 class="category-title">Information &amp; Documents</h3>
+            </div>
+            <div class="services-grid">
+              <div class="service-card" data-service="coming-soon">
+                <div class="service-card-icon" aria-hidden="true"><i class="fas fa-clipboard-list"></i></div>
+                <h4 class="service-card-title">Society Documents</h4>
+                <p class="service-card-desc">Access society bye-laws, registration certificates, and official documents.</p>
+                <span class="service-card-status status-coming-soon">Coming Soon</span>
+              </div>
+              <div class="service-card" data-service="coming-soon">
+                <div class="service-card-icon" aria-hidden="true"><i class="fas fa-phone-alt"></i></div>
+                <h4 class="service-card-title">Emergency Contacts</h4>
+                <p class="service-card-desc">Quick access to emergency contact numbers and important helpline information.</p>
+                <span class="service-card-status status-coming-soon">Coming Soon</span>
+              </div>
+              <div class="service-card" data-service="coming-soon">
+                <div class="service-card-icon" aria-hidden="true"><i class="fas fa-calendar-alt"></i></div>
+                <h4 class="service-card-title">Event Calendar</h4>
+                <p class="service-card-desc">View upcoming society events, meetings, and important dates.</p>
+                <span class="service-card-status status-coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Quick Links -->
+          <section class="quick-links-section">
+            <h3 class="quick-links-title"><i class="fas fa-link"></i> Quick External Links</h3>
+            <div class="quick-links-grid">
+              <a href="https://mahacoop.gov.in" target="_blank" rel="noopener noreferrer" class="quick-link">
+                <span class="quick-link-icon"><i class="fas fa-university"></i></span>
+                <span>Maharashtra Co-op Dept</span>
+              </a>
+              <a href="https://www.maharashtra.gov.in" target="_blank" rel="noopener noreferrer" class="quick-link">
+                <span class="quick-link-icon"><i class="fas fa-university"></i></span>
+                <span>State Government</span>
+              </a>
+              <a href="https://www.india.gov.in" target="_blank" rel="noopener noreferrer" class="quick-link">
+                <span class="quick-link-icon"><i class="fas fa-flag"></i></span>
+                <span>National Portal</span>
+              </a>
+              <a href="#" target="_blank" rel="noopener noreferrer" class="quick-link">
+                <span class="quick-link-icon"><i class="fas fa-lightbulb"></i></span>
+                <span>Electricity Board</span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <div id="footer-container"></div>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal-content-wrapper">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modalTitle">Service Form</h3>
+          <button class="modal-close" id="modalClose" aria-label="Close modal">×</button>
+        </div>
+        <div class="modal-body" id="modalBody">
+          <!-- Form content will be inserted here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-notification" id="toastNotification">
+      <span class="toast-icon"><i class="fas fa-check"></i></span>
+      <span class="toast-message" id="toastMessage">Success!</span>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="assets/js/online-services.js"></script>
+    <script src="assets/js/login-modal.js"></script>
+  </body>
+</html>

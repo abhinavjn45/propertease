@@ -1,0 +1,451 @@
+/* Contact page specific styles */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: #edf4ff;
+}
+
+.app-wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 1 auto;
+    padding: 1.75rem 1rem 1.75rem;
+}
+
+.main-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+
+/* Hero: match the global look used on other pages */
+.hero-section {
+    background: linear-gradient(135deg, #0b3c8a 0%, #122142 45%, #0b3c8a 100%);
+    color: #ffffff;
+    padding: 2.5rem 1rem 2.25rem;
+    /* Ensure subpage hero doesn't take homepage full-height layout */
+    min-height: auto;
+    display: block;
+    align-items: initial;
+}
+
+.hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.hero-breadcrumb {
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+    color: #c7d8ff;
+}
+
+.hero-breadcrumb a {
+    color: #ffc107;
+    text-decoration: none;
+}
+
+.hero-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.hero-title {
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    color: #dbe6ff;
+    margin-bottom: 0;
+    max-width: 42rem;
+}
+
+.emergency-banner {
+    background: #dc3545;
+    color: #ffffff;
+    border-radius: 0.9rem;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 14px rgba(220, 53, 69, 0.25);
+}
+
+.emergency-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.emergency-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.emergency-contact {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.emergency-contact a {
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+}
+
+.emergency-contact a:hover {
+    border-bottom-style: solid;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-card {
+    background: #f2f6ff;
+    border-radius: 0.9rem;
+    padding: 1.5rem;
+    border: 1px solid #d3def8;
+    box-shadow: 0 4px 14px rgba(11, 60, 138, 0.08);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #d3def8;
+}
+
+.card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #0b3c8a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #122142;
+    margin: 0;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #122142;
+    margin-bottom: 0.4rem;
+}
+
+.form-label .required {
+    color: #dc3545;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid #d3def8;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: #0a58ca;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-error {
+    color: #dc3545;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    display: none;
+}
+
+.form-error.active {
+    display: block;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: #0b3c8a;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-submit:hover {
+    background: #0a58ca;
+}
+
+.btn-submit:disabled {
+    background: #6c7aa5;
+    cursor: not-allowed;
+}
+
+.info-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid #d3def8;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.info-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #e8f0ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0b3c8a;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.info-content {
+    flex: 1 1 auto;
+}
+
+.info-label {
+    font-size: 0.8rem;
+    color: #6c7aa5;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+}
+
+.info-value {
+    font-size: 0.95rem;
+    color: #122142;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.info-value a {
+    color: #0b3c8a;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.info-value a:hover {
+    text-decoration: underline;
+}
+
+.map-container {
+    background: #f2f6ff;
+    border-radius: 0.9rem;
+    padding: 1.5rem;
+    border: 1px solid #d3def8;
+    box-shadow: 0 4px 14px rgba(11, 60, 138, 0.08);
+    margin-bottom: 1.5rem;
+}
+
+.map-embed {
+    width: 100%;
+    height: 350px;
+    border-radius: 0.7rem;
+    border: none;
+    margin-top: 1rem;
+}
+
+.departments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.dept-card {
+    background: #f2f6ff;
+    border-radius: 0.9rem;
+    padding: 1.25rem;
+    border: 1px solid #d3def8;
+    box-shadow: 0 4px 14px rgba(11, 60, 138, 0.08);
+}
+
+.dept-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.dept-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #0b3c8a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.4rem;
+}
+
+.dept-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #122142;
+    margin: 0;
+}
+
+.dept-info {
+    font-size: 0.85rem;
+    color: #4d5c82;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+
+.dept-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.dept-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.dept-contact-item a {
+    color: #0b3c8a;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.dept-contact-item a:hover {
+    text-decoration: underline;
+}
+
+.toast-notification {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: #198754;
+    color: #ffffff;
+    padding: 1rem 1.5rem;
+    border-radius: 0.7rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 10000;
+    animation: slideIn 0.3s ease;
+}
+
+.toast-notification.active {
+    display: flex;
+}
+
+.toast-icon {
+    font-size: 1.5rem;
+}
+
+.toast-message {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .hero-section {
+        padding-inline: 0.75rem;
+    }
+
+    main {
+        padding-inline: 0.75rem;
+    }
+
+    .emergency-contacts {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .departments-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .toast-notification {
+        top: 1rem;
+        right: 1rem;
+        left: 1rem;
+    }
+}

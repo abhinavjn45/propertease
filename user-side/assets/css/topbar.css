@@ -1,0 +1,58 @@
+/* Top announcement bar */
+.top-bar {
+  background: #0b3c8a;
+  color: #ffffff;
+  font-size: 0.875rem;
+  padding: 0.35rem 0;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 2px solid #ffc107;
+}
+
+.top-bar-label {
+  font-weight: 600;
+  padding: 0 0.75rem;
+  white-space: nowrap;
+  border-right: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.top-bar-marquee {
+  overflow: hidden;
+  position: relative;
+}
+
+.top-bar-track {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: ticker 18s linear infinite;
+  animation-delay: 0s;
+}
+
+.top-bar-item {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 2.5rem;
+}
+
+.top-bar-item:first-child {
+  margin-left: 2.5rem;
+}
+
+.top-bar-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #ffc107;
+  margin-right: 0.35rem;
+  flex-shrink: 0;
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

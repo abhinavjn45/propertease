@@ -1,0 +1,16 @@
+From https://github.com/abhinavjn45/propertease
+ * branch            main       -> FETCH_HEAD
+   22dabac..1b6adb6  main       -> origin/main
+Updating cb1637a..1b6adb6
+Fast-forward
+ .env                                               |   2 +-
+ .vscode/settings.json                              |   2 +-
+ assets/img/home-3/choose-us.png                    | Bin 4855 -> 24355 bytes
+ assets/img/home-3/customer-img.png                 | Bin 8297 -> 29329 bytes
+ assets/img/home-3/feature-focus.png                | Bin 4670 -> 56230 bytes
+ assets/img/home-3/product-tour/product-tour-01.png | Bin 4962 -> 38059 bytes
+ assets/img/home-3/product-tour/product-tour-03.png | Bin 4962 -> 25766 bytes
+ assets/img/new-add/crm-img.png                     | Bin 4494 -> 76188 bytes
+ assets/img/new-add/web-app.png                     | Bin 4066 -> 114660 bytes
+ index.html                                         |  20 ++++++++++----------
+ 10 files changed, 12 insertions(+), 12 deletions(-)

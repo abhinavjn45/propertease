@@ -1,0 +1,3001 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Governance Platform - Enterprise Software for Communities</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    .font-serif {
+      font-family: 'Crimson Pro', serif;
+    }
+
+    .font-sans {
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Navigation Styles */
+    .navbar {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .navbar.scrolled {
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .navbar-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.125rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      transition: padding 0.3s ease;
+    }
+
+    .navbar.scrolled .navbar-container {
+      padding: 0.875rem 3rem;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+
+    .brand-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.125rem;
+    }
+
+    .brand-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    .brand-tagline {
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.5;
+      line-height: 1;
+    }
+
+    .navbar-nav {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      text-decoration: none;
+      position: relative;
+      padding: 0.25rem 0;
+      transition: opacity 0.2s ease;
+      letter-spacing: 0.005em;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      opacity: 0.7;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-shrink: 0;
+    }
+
+    .trust-signal {
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.5;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      white-space: nowrap;
+    }
+
+    .trust-signal::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .nav-cta {
+      padding: 0.625rem 1.5rem;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      border: 2px solid;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      letter-spacing: 0.005em;
+      cursor: pointer;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Mobile menu */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 0.375rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .mobile-menu-toggle span {
+      width: 24px;
+      height: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 2rem;
+      overflow-y: auto;
+      z-index: 999;
+    }
+
+    .mobile-menu.active {
+      display: block;
+    }
+
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .mobile-nav .nav-link {
+      font-size: 1.125rem;
+      padding: 0.5rem 0;
+    }
+
+    .mobile-trust-signal {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid;
+    }
+
+    @media (max-width: 1024px) {
+      .navbar-nav {
+        display: none;
+      }
+
+      .trust-signal {
+        display: none;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      .navbar-container {
+        padding: 1rem 2rem;
+      }
+
+      .navbar.scrolled .navbar-container {
+        padding: 0.875rem 2rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .navbar-container {
+        padding: 1rem 1.5rem;
+      }
+
+      .navbar.scrolled .navbar-container {
+        padding: 0.875rem 1.5rem;
+      }
+
+      .brand-icon {
+        width: 32px;
+        height: 32px;
+      }
+
+      .brand-name {
+        font-size: 1.125rem;
+      }
+
+      .brand-tagline {
+        font-size: 0.625rem;
+      }
+    }
+
+    /* Hero Section Styles */
+    .hero-wrapper {
+      min-height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .hero-content {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      padding: 3rem;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .left-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      animation: slideInLeft 0.9s ease-out;
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .headline {
+      font-size: 4.5rem;
+      line-height: 1.1;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .subheadline {
+      font-size: 1.375rem;
+      line-height: 1.6;
+      opacity: 0.75;
+      max-width: 540px;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2.5rem;
+      font-size: 1.0625rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.01em;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .cta-button:hover::before {
+      opacity: 1;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .cta-button span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .trust-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      border: 1px solid;
+      border-radius: 2rem;
+      white-space: nowrap;
+      transition: all 0.3s ease;
+    }
+
+    .badge:hover {
+      transform: translateY(-1px);
+    }
+
+    .badge-icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    .right-content {
+      position: relative;
+      height: 100%;
+      min-height: 450px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: slideInRight 0.9s ease-out;
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .dashboard-mockup {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      transform: scale(0.85);
+    }
+
+    .dashboard-mockup:hover {
+      transform: scale(0.87);
+    }
+
+    .dashboard-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dashboard-title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+    }
+
+    .compliance-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.375rem 0.875rem;
+      border-radius: 1.5rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .dashboard-nav {
+      padding: 1.5rem;
+      border-bottom: 1px solid;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-item {
+      font-size: 0.875rem;
+      font-weight: 500;
+      opacity: 0.6;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+      position: relative;
+      padding-bottom: 0.25rem;
+    }
+
+    .nav-item.active {
+      opacity: 1;
+    }
+
+    .nav-item.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+    }
+
+    .nav-item:hover {
+      opacity: 0.9;
+    }
+
+    .dashboard-content {
+      padding: 1.5rem;
+    }
+
+    .content-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .content-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+
+    .filter-badge {
+      padding: 0.375rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border-radius: 0.25rem;
+      border: 1px solid;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    .data-table th {
+      text-align: left;
+      padding: 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid;
+    }
+
+    .data-table td {
+      padding: 1rem 0.75rem;
+      font-size: 0.875rem;
+      border-bottom: 1px solid;
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .record-type {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .record-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.25rem 0.625rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .timestamp {
+      font-size: 0.8125rem;
+      opacity: 0.6;
+      font-variant-numeric: tabular-nums;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 2rem;
+      }
+
+      .headline {
+        font-size: 3.5rem;
+      }
+
+      .right-content {
+        min-height: 380px;
+      }
+      
+      .dashboard-mockup {
+        transform: scale(0.78);
+      }
+      
+      .dashboard-mockup:hover {
+        transform: scale(0.80);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-content {
+        padding: 1.5rem;
+        gap: 2rem;
+      }
+
+      .headline {
+        font-size: 2.5rem;
+      }
+
+      .subheadline {
+        font-size: 1.125rem;
+      }
+
+      .trust-badges {
+        gap: 0.5rem;
+      }
+
+      .badge {
+        font-size: 0.75rem;
+        padding: 0.375rem 0.75rem;
+      }
+
+      .right-content {
+        min-height: 320px;
+      }
+      
+      .dashboard-mockup {
+        transform: scale(0.70);
+      }
+      
+      .dashboard-mockup:hover {
+        transform: scale(0.72);
+      }
+
+      .dashboard-nav {
+        gap: 1rem;
+        overflow-x: auto;
+      }
+    }
+
+    /* Compliance Showcase Section */
+    .compliance-showcase {
+      width: 100%;
+      padding: 6rem 3rem;
+      position: relative;
+    }
+
+    .showcase-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .showcase-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .showcase-heading {
+      font-size: 3.5rem;
+      line-height: 1.1;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .showcase-description {
+      font-size: 1.125rem;
+      line-height: 1.7;
+      opacity: 0.7;
+      max-width: 500px;
+    }
+
+    .showcase-right {
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .showcase-right.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Glassmorphic Dashboard */
+    .glass-dashboard {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+      position: relative;
+    }
+
+    .dashboard-live-status {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      border-radius: 2rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: livePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes livePulse {
+      0%, 100% { 
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% { 
+        opacity: 0.6;
+        transform: scale(0.95);
+      }
+    }
+
+    .live-text {
+      opacity: 0.9;
+    }
+
+    /* Compliance Meter */
+    .compliance-meter-section {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .compliance-ring {
+      width: 100%;
+      height: 100%;
+      transform: scaleX(-1);
+    }
+
+    .ring-background {
+      stroke: rgba(255, 255, 255, 0.1);
+    }
+
+    .ring-progress {
+      stroke-dasharray: 534;
+      stroke-dashoffset: 534;
+      transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .ring-progress.animate {
+      stroke-dashoffset: 80.1;
+    }
+
+    .meter-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .meter-value {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .meter-label {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      opacity: 0.6;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Alerts Panel */
+    .alerts-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .alert-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.6s ease;
+    }
+
+    .alert-item.alert-warning {
+      border-left: 3px solid;
+    }
+
+    .alert-item.alert-success {
+      border-left: 3px solid;
+    }
+
+    .alert-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+    }
+
+    .alert-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+    }
+
+    .alert-type {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.7;
+    }
+
+    .alert-message {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .alert-timestamp {
+      font-size: 0.75rem;
+      opacity: 0.5;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Sync Status */
+    .sync-status {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .sync-icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      opacity: 0.8;
+    }
+
+    .sync-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .sync-label {
+      font-size: 0.75rem;
+      opacity: 0.6;
+    }
+
+    .sync-url {
+      font-size: 0.875rem;
+      font-weight: 500;
+      font-family: 'Courier New', monospace;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 1024px) {
+      .compliance-showcase {
+        padding: 4rem 2rem;
+      }
+
+      .showcase-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .showcase-heading {
+        font-size: 3rem;
+      }
+
+      .showcase-description {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .compliance-showcase {
+        padding: 3rem 1.5rem;
+      }
+
+      .showcase-heading {
+        font-size: 2.25rem;
+      }
+
+      .showcase-description {
+        font-size: 1rem;
+      }
+
+      .glass-dashboard {
+        padding: 1.5rem;
+      }
+
+      .compliance-meter-section {
+        width: 160px;
+        height: 160px;
+      }
+
+      .meter-value {
+        font-size: 2.25rem;
+      }
+
+      .alert-item {
+        padding: 1rem;
+        gap: 0.75rem;
+      }
+
+      .alert-icon {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    /* Transformation Section - Bento Grid */
+    .transformation-section {
+      width: 100%;
+      padding: 6rem 3rem;
+      position: relative;
+    }
+
+    .transformation-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .transformation-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .transformation-title {
+      font-size: 3.75rem;
+      line-height: 1.1;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+
+    .transformation-subtitle {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      opacity: 0.65;
+    }
+
+    /* Bento Grid Layout */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.5rem;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .bento-grid.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .bento-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+      padding: 2.5rem;
+      overflow: visible;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bento-card:hover {
+      border-color: rgba(0, 0, 0, 0.15);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* Card Sizes */
+    .bento-card-1 {
+      grid-column: span 6;
+      min-height: 450px;
+    }
+
+    .bento-card-2 {
+      grid-column: span 6;
+      min-height: 450px;
+    }
+
+    .bento-card-3 {
+      grid-column: span 5;
+      min-height: 500px;
+    }
+
+    .bento-card-4 {
+      grid-column: span 7;
+      min-height: 500px;
+    }
+
+    /* Card Content */
+    .card-state-wrapper {
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-state {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-before {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .card-after {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+
+    .bento-card:hover .card-before {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+
+    .bento-card:hover .card-after {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .card-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.25rem;
+      opacity: 0.5;
+    }
+
+    .card-label-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .card-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .card-visual {
+      position: relative;
+      margin-top: auto;
+      padding-top: 2rem;
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    /* Card 1: Spreadsheet → Ledger */
+    .spreadsheet-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .spreadsheet-header {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .spreadsheet-header-cell {
+      flex: 1;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.4;
+      padding: 0.5rem;
+    }
+
+    .spreadsheet-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .spreadsheet-cell {
+      height: 36px;
+      border-radius: 4px;
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: 0 0.75rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+    }
+
+    .spreadsheet-cell.date {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      opacity: 0.6;
+    }
+
+    .spreadsheet-cell.amount {
+      font-family: 'Courier New', monospace;
+      font-weight: 600;
+      justify-content: flex-end;
+    }
+
+    .spreadsheet-cell.status {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .spreadsheet-note {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed rgba(0, 0, 0, 0.1);
+      font-size: 0.75rem;
+      opacity: 0.5;
+    }
+
+    .spreadsheet-icon {
+      width: 14px;
+      height: 14px;
+      opacity: 0.6;
+    }
+
+    .ledger-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .ledger-chart {
+      height: 140px;
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.02);
+      border-radius: 6px;
+    }
+
+    .ledger-bar {
+      flex: 1;
+      background: currentColor;
+      opacity: 0.7;
+      border-radius: 4px 4px 0 0;
+      transition: all 0.5s ease;
+      min-height: 20px;
+      position: relative;
+    }
+
+    .ledger-bar::after {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .bento-card:hover .ledger-bar::after {
+      opacity: 1;
+    }
+
+    .bento-card:hover .ledger-bar:nth-child(1) { height: 45%; }
+    .bento-card:hover .ledger-bar:nth-child(2) { height: 75%; }
+    .bento-card:hover .ledger-bar:nth-child(3) { height: 55%; }
+    .bento-card:hover .ledger-bar:nth-child(4) { height: 90%; }
+    .bento-card:hover .ledger-bar:nth-child(5) { height: 65%; }
+    .bento-card:hover .ledger-bar:nth-child(6) { height: 80%; }
+    .bento-card:hover .ledger-bar:nth-child(7) { height: 50%; }
+
+    .ledger-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+
+    .ledger-stat {
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.04);
+      border-radius: 6px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+      transition: all 0.3s ease;
+    }
+
+    .bento-card:hover .ledger-stat {
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    .ledger-stat-label {
+      font-size: 0.6875rem;
+      opacity: 0.5;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .ledger-stat-value {
+      font-size: 1.125rem;
+      font-weight: 700;
+      font-family: 'Courier New', monospace;
+    }
+
+    .ledger-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      opacity: 0.7;
+    }
+
+    .ledger-check {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Card 2: Paper → Multi-Channel */
+    .paper-visual {
+      width: 140px;
+      height: 180px;
+      background: rgba(0, 0, 0, 0.06);
+      border-radius: 6px;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .paper-lines {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.25rem;
+      right: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .paper-line {
+      height: 2px;
+      background: currentColor;
+      opacity: 0.15;
+      border-radius: 1px;
+    }
+
+    .paper-line:nth-child(1) { width: 80%; }
+    .paper-line:nth-child(2) { width: 100%; }
+    .paper-line:nth-child(3) { width: 65%; }
+    .paper-line:nth-child(4) { width: 90%; }
+    .paper-line:nth-child(5) { width: 75%; }
+
+    .multichannel-visual {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .channel-device {
+      aspect-ratio: 1;
+      background: rgba(0, 0, 0, 0.04);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      transition: all 0.4s ease;
+    }
+
+    .bento-card:hover .channel-device {
+      background: rgba(0, 0, 0, 0.06);
+      border-color: rgba(0, 0, 0, 0.12);
+      transform: scale(1.03);
+    }
+
+    .channel-icon {
+      width: 32px;
+      height: 32px;
+      opacity: 0.4;
+    }
+
+    /* Card 3: Disputed → Immutable */
+    .disputed-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      width: 100%;
+    }
+
+    .disputed-doc {
+      padding: 1.5rem;
+      background: rgba(0, 0, 0, 0.04);
+      border-radius: 6px;
+      border: 2px dashed rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+
+    .disputed-line {
+      height: 3px;
+      background: currentColor;
+      opacity: 0.15;
+      margin-bottom: 0.75rem;
+      border-radius: 1px;
+    }
+
+    .disputed-question {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 80, 80, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 700;
+      color: rgba(255, 80, 80, 0.9);
+      border: 2px solid rgba(255, 80, 80, 0.3);
+    }
+
+    .immutable-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      width: 100%;
+    }
+
+    .immutable-seal {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid rgba(0, 0, 0, 0.1);
+      transition: all 0.4s ease;
+    }
+
+    .bento-card:hover .immutable-seal {
+      background: rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.15);
+      transform: rotate(15deg) scale(1.05);
+    }
+
+    .seal-icon {
+      width: 48px;
+      height: 48px;
+      opacity: 0.4;
+    }
+
+    .immutable-details {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .immutable-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.875rem 1rem;
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 6px;
+      font-size: 0.8125rem;
+    }
+
+    .immutable-label {
+      opacity: 0.5;
+      font-weight: 500;
+    }
+
+    .immutable-value {
+      font-weight: 600;
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+    }
+
+    /* Card 4: Fragmented → Unified */
+    .fragmented-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .fragmented-tools {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .tool-icon-box {
+      aspect-ratio: 1;
+      background: rgba(0, 0, 0, 0.04);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      position: relative;
+    }
+
+    .tool-icon-box::after {
+      content: '';
+      position: absolute;
+      inset: 0.75rem;
+      border: 2px solid currentColor;
+      opacity: 0.15;
+      border-radius: 4px;
+    }
+
+    .fragmented-label {
+      text-align: center;
+      font-size: 0.75rem;
+      opacity: 0.4;
+      margin-top: 0.5rem;
+      line-height: 1.5;
+    }
+
+    .unified-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+    }
+
+    .unified-dashboard {
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.04);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      transition: all 0.4s ease;
+    }
+
+    .bento-card:hover .unified-dashboard {
+      background: rgba(0, 0, 0, 0.06);
+      border-color: rgba(0, 0, 0, 0.12);
+      transform: scale(1.02);
+    }
+
+    .unified-header {
+      display: flex;
+      gap: 0.625rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .unified-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.3;
+    }
+
+    .unified-modules {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+
+    .unified-module {
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-align: center;
+      opacity: 0.6;
+    }
+
+    .unified-footer {
+      margin-top: 1.25rem;
+      padding: 1rem 1.25rem;
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.8125rem;
+      line-height: 1.5;
+    }
+
+    .unified-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.2;
+      flex-shrink: 0;
+    }
+
+    /* Transition indicator */
+    .card-arrow {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s ease;
+      opacity: 0.4;
+    }
+
+    .bento-card:hover .card-arrow {
+      background: rgba(0, 0, 0, 0.1);
+      opacity: 0.8;
+      transform: translateX(4px);
+    }
+
+    .arrow-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Responsive Bento Grid */
+    @media (max-width: 1024px) {
+      .transformation-section {
+        padding: 4rem 2rem;
+      }
+
+      .transformation-title {
+        font-size: 3rem;
+      }
+
+      .bento-card-1,
+      .bento-card-2,
+      .bento-card-3,
+      .bento-card-4 {
+        grid-column: span 12;
+        min-height: 400px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .transformation-section {
+        padding: 3rem 1.5rem;
+      }
+
+      .transformation-title {
+        font-size: 2.25rem;
+      }
+
+      .transformation-subtitle {
+        font-size: 1rem;
+      }
+
+      .bento-card {
+        padding: 1.75rem;
+        min-height: 380px !important;
+      }
+
+      .card-title {
+        font-size: 1.375rem;
+      }
+
+      .ledger-chart {
+        height: 100px;
+      }
+
+      .multichannel-visual {
+        max-width: 240px;
+      }
+
+      .paper-visual {
+        width: 120px;
+        height: 160px;
+      }
+
+      .immutable-seal {
+        width: 80px;
+        height: 80px;
+      }
+
+      .seal-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .unified-dashboard {
+        padding: 1.5rem;
+      }
+
+      .fragmented-tools {
+        gap: 0.75rem;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body class="h-full w-full font-sans"><!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+   <div class="navbar-container"><!-- Brand --> <a href="#" class="navbar-brand">
+     <svg class="brand-icon" viewbox="0 0 36 36" fill="none"><rect x="4" y="4" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" /> <path d="M14 18h8M18 14v8" stroke="currentColor" stroke-width="2" stroke-linecap="square" />
+     </svg>
+     <div class="brand-content">
+      <div class="brand-name font-serif" id="brand-name">
+       GOVOS
+      </div>
+      <div class="brand-tagline" id="brand-tagline">
+       Digital Governance Platform
+      </div>
+     </div></a> <!-- Desktop Navigation -->
+    <ul class="navbar-nav">
+     <li><a href="#platform" class="nav-link" id="nav-link-1">Platform</a></li>
+     <li><a href="#governance" class="nav-link" id="nav-link-2">Governance</a></li>
+     <li><a href="#compliance" class="nav-link" id="nav-link-3">Compliance</a></li>
+     <li><a href="#transparency" class="nav-link" id="nav-link-4">Transparency</a></li>
+     <li><a href="#pricing" class="nav-link" id="nav-link-5">Pricing</a></li>
+     <li><a href="#resources" class="nav-link" id="nav-link-6">Resources</a></li>
+    </ul><!-- Right Side -->
+    <div class="navbar-right">
+     <div class="trust-signal" id="trust-signal">
+      Compliance-Ready
+     </div><a href="#demo" class="nav-cta" id="nav-cta">Request Demo</a> <!-- Mobile Menu Toggle --> <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu"> <span></span> <span></span> <span></span> </button>
+    </div>
+   </div><!-- Mobile Menu -->
+   <div class="mobile-menu" id="mobile-menu">
+    <ul class="mobile-nav">
+     <li><a href="#platform" class="nav-link">Platform</a></li>
+     <li><a href="#governance" class="nav-link">Governance</a></li>
+     <li><a href="#compliance" class="nav-link">Compliance</a></li>
+     <li><a href="#transparency" class="nav-link">Transparency</a></li>
+     <li><a href="#pricing" class="nav-link">Pricing</a></li>
+     <li><a href="#resources" class="nav-link">Resources</a></li>
+    </ul><a href="#demo" class="nav-cta" style="display: inline-block; text-align: center;">Request Demo</a>
+    <div class="mobile-trust-signal trust-signal" style="display: flex;">
+     Compliance-Ready
+    </div>
+   </div>
+  </nav><!-- Hero Section -->
+  <div class="hero-wrapper" id="hero-wrapper">
+   <div class="hero-content"><!-- Left Content -->
+    <div class="left-content">
+     <h1 class="headline font-serif" id="main-headline">The Digital Constitution for Your Society.</h1>
+     <p class="subheadline" id="sub-headline">A governance-grade platform to automate compliance, publish public records on your own domain, and run your community with transparency and legal confidence.</p>
+     <div><button class="cta-button" id="cta-button"> <span id="cta-text">Request a Demo</span> </button>
+      <div class="trust-badges">
+       <div class="badge" id="badge-1">
+        <svg class="badge-icon" viewbox="0 0 14 14" fill="none"><path d="M7 1L8.5 5.5L13 7L8.5 8.5L7 13L5.5 8.5L1 7L5.5 5.5L7 1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg><span id="badge-1-text">Designed for Regulatory Compliance</span>
+       </div>
+       <div class="badge" id="badge-2">
+        <svg class="badge-icon" viewbox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5" /> <path d="M4 7l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg><span id="badge-2-text">Public Disclosure Ready</span>
+       </div>
+       <div class="badge" id="badge-3">
+        <svg class="badge-icon" viewbox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.5" /> <path d="M5 7h4M7 5v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </svg><span id="badge-3-text">Audit-Friendly &amp; Time-Stamped Records</span>
+       </div>
+       <div class="badge" id="badge-4">
+        <svg class="badge-icon" viewbox="0 0 14 14" fill="none"><path d="M2 4h10M2 7h10M2 10h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </svg><span id="badge-4-text">Custom Domain Publishing</span>
+       </div>
+      </div>
+     </div>
+    </div><!-- Right Content - Dashboard Mockup -->
+    <div class="right-content">
+     <div class="dashboard-mockup" id="dashboard-mockup">
+      <div class="dashboard-header" id="dashboard-header">
+       <div class="dashboard-title" id="dashboard-title">
+        Governance Dashboard
+       </div>
+       <div class="compliance-indicator" id="compliance-indicator"><span class="status-dot" id="status-dot"></span> <span>100% Compliant</span>
+       </div>
+      </div>
+      <div class="dashboard-nav" id="dashboard-nav">
+       <div class="nav-item active" id="nav-notices">
+        Notices
+       </div>
+       <div class="nav-item" id="nav-records">
+        Records
+       </div>
+       <div class="nav-item" id="nav-compliance">
+        Compliance
+       </div>
+       <div class="nav-item" id="nav-audit">
+        Audit Trail
+       </div>
+      </div>
+      <div class="dashboard-content" id="dashboard-content">
+       <div class="content-header">
+        <div class="content-title">
+         Recent Publications
+        </div>
+        <div class="filter-badge" id="filter-badge">
+         Last 30 Days
+        </div>
+       </div>
+       <table class="data-table">
+        <thead>
+         <tr>
+          <th>Record Type</th>
+          <th>Status</th>
+          <th>Published</th>
+         </tr>
+        </thead>
+        <tbody id="table-body">
+         <tr>
+          <td>
+           <div class="record-type">
+            <div class="record-icon" id="record-icon-1">
+             <svg width="16" height="16" viewbox="0 0 16 16" fill="none"><rect x="3" y="3" width="10" height="10" stroke="currentColor" stroke-width="1.5" />
+             </svg>
+            </div><span>Annual General Meeting</span>
+           </div></td>
+          <td><span class="status-badge" id="status-badge-1"> <span class="status-dot" id="status-dot-1"></span> Verified </span></td>
+          <td><span class="timestamp">2024-01-15 14:32</span></td>
+         </tr>
+         <tr>
+          <td>
+           <div class="record-type">
+            <div class="record-icon" id="record-icon-2">
+             <svg width="16" height="16" viewbox="0 0 16 16" fill="none"><rect x="3" y="3" width="10" height="10" stroke="currentColor" stroke-width="1.5" />
+             </svg>
+            </div><span>Financial Disclosure Q4</span>
+           </div></td>
+          <td><span class="status-badge" id="status-badge-2"> <span class="status-dot" id="status-dot-2"></span> Verified </span></td>
+          <td><span class="timestamp">2024-01-12 09:15</span></td>
+         </tr>
+         <tr>
+          <td>
+           <div class="record-type">
+            <div class="record-icon" id="record-icon-3">
+             <svg width="16" height="16" viewbox="0 0 16 16" fill="none"><rect x="3" y="3" width="10" height="10" stroke="currentColor" stroke-width="1.5" />
+             </svg>
+            </div><span>Committee Resolution</span>
+           </div></td>
+          <td><span class="status-badge" id="status-badge-3"> <span class="status-dot" id="status-dot-3"></span> Verified </span></td>
+          <td><span class="timestamp">2024-01-08 16:45</span></td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div><!-- Compliance Showcase Section -->
+  <section class="compliance-showcase" id="compliance-showcase">
+   <div class="showcase-container"><!-- Left Column - Context -->
+    <div class="showcase-left">
+     <h2 class="showcase-heading font-serif" id="showcase-heading">Know Your Compliance Status. At All Times.</h2>
+     <p class="showcase-description" id="showcase-description">Track regulatory readiness, deadlines, and disclosures across your community from a single, legally defensible dashboard.</p>
+    </div><!-- Right Column - Glassmorphic Dashboard -->
+    <div class="showcase-right">
+     <div class="glass-dashboard" id="glass-dashboard"><!-- Live Status Indicator -->
+      <div class="dashboard-live-status"><span class="live-dot"></span> <span class="live-text">Live</span>
+      </div><!-- Compliance Meter -->
+      <div class="compliance-meter-section">
+       <svg class="compliance-ring" viewbox="0 0 200 200"><circle class="ring-background" cx="100" cy="100" r="85" fill="none" stroke-width="12" /> <circle class="ring-progress" id="ring-progress" cx="100" cy="100" r="85" fill="none" stroke-width="12" stroke-linecap="round" transform="rotate(-90 100 100)" />
+       </svg>
+       <div class="meter-content">
+        <div class="meter-value" id="meter-value">
+         0%
+        </div>
+        <div class="meter-label">
+         Compliance Score
+        </div>
+       </div>
+      </div><!-- System Alerts Panel -->
+      <div class="alerts-panel">
+       <div class="alert-item alert-warning" id="alert-1" style="opacity: 0;">
+        <div class="alert-icon">
+         <svg width="20" height="20" viewbox="0 0 20 20" fill="none"><path d="M10 6v4m0 4h.01M4.93 4.93l10.14 10.14m0-10.14L4.93 15.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" /> <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" />
+         </svg>
+        </div>
+        <div class="alert-content">
+         <div class="alert-type">
+          System Alert
+         </div>
+         <div class="alert-message" id="alert-1-message">
+          14 days remaining to submit mandatory annual return
+         </div>
+         <div class="alert-timestamp">
+          System generated • 2h ago
+         </div>
+        </div>
+       </div>
+       <div class="alert-item alert-warning" id="alert-2" style="opacity: 0;">
+        <div class="alert-icon">
+         <svg width="20" height="20" viewbox="0 0 20 20" fill="none"><path d="M10 6v4m0 4h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" /> <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" />
+         </svg>
+        </div>
+        <div class="alert-content">
+         <div class="alert-type">
+          Action Required
+         </div>
+         <div class="alert-message" id="alert-2-message">
+          Disclosure update pending for public notice board
+         </div>
+         <div class="alert-timestamp">
+          System generated • 5h ago
+         </div>
+        </div>
+       </div>
+       <div class="alert-item alert-success" id="alert-3" style="opacity: 0;">
+        <div class="alert-icon">
+         <svg width="20" height="20" viewbox="0 0 20 20" fill="none"><path d="M6 10l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" />
+         </svg>
+        </div>
+        <div class="alert-content">
+         <div class="alert-type">
+          Success
+         </div>
+         <div class="alert-message" id="alert-3-message">
+          Public website records successfully published
+         </div>
+         <div class="alert-timestamp">
+          System generated • 1d ago
+         </div>
+        </div>
+       </div>
+      </div><!-- Sync Status -->
+      <div class="sync-status">
+       <div class="sync-icon">
+        <svg width="16" height="16" viewbox="0 0 16 16" fill="none"><path d="M14 8A6 6 0 1 1 2 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /> <path d="M2 5v3h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+       </div>
+       <div class="sync-text"><span class="sync-label">Public disclosures synced to</span> <span class="sync-url">yoursocietyname.com/notices</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Transformation Section - Bento Grid -->
+  <section class="transformation-section" id="transformation-section">
+   <div class="transformation-container"><!-- Section Header -->
+    <div class="transformation-header">
+     <h2 class="transformation-title font-serif" id="transformation-title">From Manual Burden to Modern Governance.</h2>
+     <p class="transformation-subtitle" id="transformation-subtitle">Replace fragmented processes with systems designed for transparency, accountability, and longevity.</p>
+    </div><!-- Bento Grid -->
+    <div class="bento-grid" id="bento-grid"><!-- Card 1: Manual Accounting → Automated Ledger -->
+     <div class="bento-card bento-card-1" id="bento-card-1">
+      <div class="card-state-wrapper"><!-- Before State -->
+       <div class="card-state card-before">
+        <div class="card-label"><span class="card-label-dot"></span> Before
+        </div>
+        <h3 class="card-title font-serif" id="card-1-before">Manual Accounting</h3>
+        <div class="card-visual">
+         <div class="spreadsheet-visual">
+          <div class="spreadsheet-header">
+           <div class="spreadsheet-header-cell">
+            Date
+           </div>
+           <div class="spreadsheet-header-cell">
+            Description
+           </div>
+           <div class="spreadsheet-header-cell">
+            Amount
+           </div>
+           <div class="spreadsheet-header-cell">
+            Status
+           </div>
+          </div>
+          <div class="spreadsheet-row">
+           <div class="spreadsheet-cell date">
+            15/01/24
+           </div>
+           <div class="spreadsheet-cell">
+            Maintenance Fee
+           </div>
+           <div class="spreadsheet-cell amount">
+            ₹5,240
+           </div>
+           <div class="spreadsheet-cell status">
+            Pending
+           </div>
+          </div>
+          <div class="spreadsheet-row">
+           <div class="spreadsheet-cell date">
+            12/01/24
+           </div>
+           <div class="spreadsheet-cell">
+            Water Bill
+           </div>
+           <div class="spreadsheet-cell amount">
+            ₹1,820
+           </div>
+           <div class="spreadsheet-cell status">
+            Paid
+           </div>
+          </div>
+          <div class="spreadsheet-row">
+           <div class="spreadsheet-cell date">
+            08/01/24
+           </div>
+           <div class="spreadsheet-cell">
+            Security Salary
+           </div>
+           <div class="spreadsheet-cell amount">
+            ₹8,500
+           </div>
+           <div class="spreadsheet-cell status">
+            Paid
+           </div>
+          </div>
+          <div class="spreadsheet-note">
+           <svg class="spreadsheet-icon" viewbox="0 0 16 16" fill="none"><path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+           </svg> Manual entry prone to errors
+          </div>
+         </div>
+        </div>
+       </div><!-- After State -->
+       <div class="card-state card-after">
+        <div class="card-label"><span class="card-label-dot"></span> After
+        </div>
+        <h3 class="card-title font-serif" id="card-1-after">Automated Ledger</h3>
+        <div class="card-visual">
+         <div class="ledger-visual">
+          <div class="ledger-chart">
+           <div class="ledger-bar" style="height: 0%;"></div>
+           <div class="ledger-bar" style="height: 0%;"></div>
+           <div class="ledger-bar" style="height: 0%;"></div>
+           <div class="ledger-bar" style="height: 0%;"></div>
+           <div class="ledger-bar" style="height: 0%;"></div>
+           <div class="ledger-bar" style="height: 0%;"></div>
+           <div class="ledger-bar" style="height: 0%;"></div>
+          </div>
+          <div class="ledger-summary">
+           <div class="ledger-stat">
+            <div class="ledger-stat-label">
+             Total In
+            </div>
+            <div class="ledger-stat-value">
+             ₹2.4L
+            </div>
+           </div>
+           <div class="ledger-stat">
+            <div class="ledger-stat-label">
+             Total Out
+            </div>
+            <div class="ledger-stat-value">
+             ₹1.8L
+            </div>
+           </div>
+           <div class="ledger-stat">
+            <div class="ledger-stat-label">
+             Balance
+            </div>
+            <div class="ledger-stat-value">
+             ₹60K
+            </div>
+           </div>
+          </div>
+          <div class="ledger-footer">
+           <div class="ledger-check">
+            <svg width="10" height="10" viewbox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+           </div><span>Real-time updates &amp; auto-reconciliation</span>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="card-arrow">
+       <svg class="arrow-icon" viewbox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+       </svg>
+      </div>
+     </div><!-- Card 2: Paper Notices → Multi-Channel Dispatch -->
+     <div class="bento-card bento-card-2" id="bento-card-2">
+      <div class="card-state-wrapper"><!-- Before State -->
+       <div class="card-state card-before">
+        <div class="card-label"><span class="card-label-dot"></span> Before
+        </div>
+        <h3 class="card-title font-serif" id="card-2-before">Paper Notices</h3>
+        <div class="card-visual">
+         <div class="paper-visual">
+          <div class="paper-lines">
+           <div class="paper-line"></div>
+           <div class="paper-line"></div>
+           <div class="paper-line"></div>
+           <div class="paper-line"></div>
+           <div class="paper-line"></div>
+          </div>
+         </div>
+        </div>
+       </div><!-- After State -->
+       <div class="card-state card-after">
+        <div class="card-label"><span class="card-label-dot"></span> After
+        </div>
+        <h3 class="card-title font-serif" id="card-2-after">Multi-Channel Dispatch</h3>
+        <div class="card-visual">
+         <div class="multichannel-visual">
+          <div class="channel-device">
+           <svg class="channel-icon" viewbox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2" /> <path d="M8 10h8M8 14h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+           </svg>
+          </div>
+          <div class="channel-device">
+           <svg class="channel-icon" viewbox="0 0 24 24" fill="none"><rect x="6" y="3" width="12" height="18" rx="2" stroke="currentColor" stroke-width="2" /> <path d="M10 6h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+           </svg>
+          </div>
+          <div class="channel-device">
+           <svg class="channel-icon" viewbox="0 0 24 24" fill="none"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+           </svg>
+          </div>
+          <div class="channel-device">
+           <svg class="channel-icon" viewbox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+           </svg>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="card-arrow">
+       <svg class="arrow-icon" viewbox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+       </svg>
+      </div>
+     </div><!-- Card 3: Disputed Records → Immutable Audit Trail -->
+     <div class="bento-card bento-card-3" id="bento-card-3">
+      <div class="card-state-wrapper"><!-- Before State -->
+       <div class="card-state card-before">
+        <div class="card-label"><span class="card-label-dot"></span> Before
+        </div>
+        <h3 class="card-title font-serif" id="card-3-before">Disputed Records</h3>
+        <div class="card-visual">
+         <div class="disputed-visual">
+          <div class="disputed-doc">
+           <div class="disputed-line" style="width: 80%;"></div>
+           <div class="disputed-line" style="width: 60%;"></div>
+           <div class="disputed-question">
+            ?
+           </div>
+          </div>
+         </div>
+        </div>
+       </div><!-- After State -->
+       <div class="card-state card-after">
+        <div class="card-label"><span class="card-label-dot"></span> After
+        </div>
+        <h3 class="card-title font-serif" id="card-3-after">Immutable Audit Trail</h3>
+        <div class="card-visual">
+         <div class="immutable-visual">
+          <div class="immutable-seal">
+           <svg class="seal-icon" viewbox="0 0 24 24" fill="none"><path d="M12 2L15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+           </svg>
+          </div>
+          <div class="immutable-details">
+           <div class="immutable-item"><span class="immutable-label">Timestamp</span> <span class="immutable-value">2024-01-15 14:32</span>
+           </div>
+           <div class="immutable-item"><span class="immutable-label">Hash</span> <span class="immutable-value">7a3f9c2e</span>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="card-arrow">
+       <svg class="arrow-icon" viewbox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+       </svg>
+      </div>
+     </div><!-- Card 4: Fragmented Tools → Unified System -->
+     <div class="bento-card bento-card-4" id="bento-card-4">
+      <div class="card-state-wrapper"><!-- Before State -->
+       <div class="card-state card-before">
+        <div class="card-label"><span class="card-label-dot"></span> Before
+        </div>
+        <h3 class="card-title font-serif" id="card-4-before">Fragmented Tools</h3>
+        <div class="card-visual">
+         <div class="fragmented-visual">
+          <div class="fragmented-tools">
+           <div class="tool-icon-box"></div>
+           <div class="tool-icon-box"></div>
+           <div class="tool-icon-box"></div>
+           <div class="tool-icon-box"></div>
+           <div class="tool-icon-box"></div>
+           <div class="tool-icon-box"></div>
+          </div>
+          <div class="fragmented-label">
+           WhatsApp • Excel • Email • Files • Folders • More...
+          </div>
+         </div>
+        </div>
+       </div><!-- After State -->
+       <div class="card-state card-after">
+        <div class="card-label"><span class="card-label-dot"></span> After
+        </div>
+        <h3 class="card-title font-serif" id="card-4-after">Unified Governance System</h3>
+        <div class="card-visual">
+         <div class="unified-visual">
+          <div class="unified-dashboard">
+           <div class="unified-header">
+            <div class="unified-dot"></div>
+            <div class="unified-dot"></div>
+            <div class="unified-dot"></div>
+           </div>
+           <div class="unified-modules">
+            <div class="unified-module">
+             Records
+            </div>
+            <div class="unified-module">
+             Notices
+            </div>
+            <div class="unified-module">
+             Accounts
+            </div>
+            <div class="unified-module">
+             Members
+            </div>
+            <div class="unified-module">
+             Compliance
+            </div>
+            <div class="unified-module">
+             Archive
+            </div>
+           </div>
+          </div>
+          <div class="unified-footer">
+           <div class="unified-check"></div><span>Single source of truth • Controlled access • Long-term retention</span>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="card-arrow">
+       <svg class="arrow-icon" viewbox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+       </svg>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <script>
+    const defaultConfig = {
+      background_color: "#FAFAF8",
+      navbar_bg_color: "#FFFFFF",
+      dashboard_bg_color: "#1a1a1a",
+      text_color: "#1a1a1a",
+      cta_bg_color: "#1a1a1a",
+      accent_color: "#C4A46A",
+      font_family: "Inter",
+      font_size: 16,
+      brand_name: "GOVOS",
+      brand_tagline: "Digital Governance Platform",
+      nav_link_1: "Platform",
+      nav_link_2: "Governance",
+      nav_link_3: "Compliance",
+      nav_link_4: "Transparency",
+      nav_link_5: "Pricing",
+      nav_link_6: "Resources",
+      nav_cta: "Request Demo",
+      trust_signal: "Compliance-Ready",
+      main_headline: "The Digital Constitution for Your Society.",
+      sub_headline: "A governance-grade platform to automate compliance, publish public records on your own domain, and run your community with transparency and legal confidence.",
+      cta_button: "Request a Demo",
+      badge_1: "Designed for Regulatory Compliance",
+      badge_2: "Public Disclosure Ready",
+      badge_3: "Audit-Friendly & Time-Stamped Records",
+      badge_4: "Custom Domain Publishing",
+      showcase_heading: "Know Your Compliance Status. At All Times.",
+      showcase_description: "Track regulatory readiness, deadlines, and disclosures across your community from a single, legally defensible dashboard.",
+      alert_1_message: "14 days remaining to submit mandatory annual return",
+      alert_2_message: "Disclosure update pending for public notice board",
+      alert_3_message: "Public website records successfully published",
+      transformation_heading: "From Manual Burden to Modern Governance.",
+      transformation_subheading: "Replace fragmented processes with systems designed for transparency, accountability, and longevity.",
+      card_1_before_title: "Manual Accounting",
+      card_1_after_title: "Automated Ledger",
+      card_2_before_title: "Paper Notices",
+      card_2_after_title: "Multi-Channel Dispatch",
+      card_3_before_title: "Disputed Records",
+      card_3_after_title: "Immutable Audit Trail",
+      card_4_before_title: "Fragmented Tools",
+      card_4_after_title: "Unified Governance System"
+    };
+
+    // Navbar scroll behavior
+    let lastScrollY = 0;
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > 20) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+      
+      lastScrollY = currentScrollY;
+    });
+
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileMenuToggle.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenuToggle.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Compliance Showcase Scroll Animation
+    const showcaseObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const showcaseRight = document.querySelector('.showcase-right');
+          const ringProgress = document.getElementById('ring-progress');
+          const meterValue = document.getElementById('meter-value');
+          
+          // Trigger animations
+          showcaseRight.classList.add('visible');
+          
+          // Animate meter from 0 to 85
+          setTimeout(() => {
+            ringProgress.classList.add('animate');
+            
+            let currentValue = 0;
+            const targetValue = 85;
+            const duration = 2000;
+            const steps = 60;
+            const increment = targetValue / steps;
+            const stepDuration = duration / steps;
+            
+            const counter = setInterval(() => {
+              currentValue += increment;
+              if (currentValue >= targetValue) {
+                currentValue = targetValue;
+                clearInterval(counter);
+              }
+              meterValue.textContent = Math.round(currentValue) + '%';
+            }, stepDuration);
+          }, 200);
+          
+          // Animate alerts sequentially
+          setTimeout(() => {
+            document.getElementById('alert-1').style.opacity = '1';
+          }, 600);
+          
+          setTimeout(() => {
+            document.getElementById('alert-2').style.opacity = '1';
+          }, 900);
+          
+          setTimeout(() => {
+            document.getElementById('alert-3').style.opacity = '1';
+          }, 1200);
+          
+          showcaseObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const showcaseSection = document.getElementById('compliance-showcase');
+    if (showcaseSection) {
+      showcaseObserver.observe(showcaseSection);
+    }
+
+    // Transformation Section Scroll Animation
+    const transformationObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bentoGrid = document.getElementById('bento-grid');
+          bentoGrid.classList.add('visible');
+          transformationObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    const transformationSection = document.getElementById('transformation-section');
+    if (transformationSection) {
+      transformationObserver.observe(transformationSection);
+    }
+
+    async function onConfigChange(config) {
+      const wrapper = document.getElementById('hero-wrapper');
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseFontStack = 'system-ui, -apple-system, sans-serif';
+      const baseSize = config.font_size || defaultConfig.font_size;
+      
+      const backgroundColor = config.background_color || defaultConfig.background_color;
+      const navbarBgColor = config.navbar_bg_color || defaultConfig.navbar_bg_color;
+      const dashboardBgColor = config.dashboard_bg_color || defaultConfig.dashboard_bg_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const ctaBgColor = config.cta_bg_color || defaultConfig.cta_bg_color;
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+
+      // Apply colors
+      wrapper.style.background = backgroundColor;
+      document.body.style.color = textColor;
+      document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+
+      // Navbar colors
+      navbar.style.background = navbarBgColor;
+      navbar.style.borderColor = `${textColor}15`;
+
+      document.querySelectorAll('.navbar-brand, .nav-link').forEach(el => {
+        el.style.color = textColor;
+      });
+
+      document.querySelectorAll('.mobile-menu-toggle span').forEach(span => {
+        span.style.background = textColor;
+      });
+
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.style.background = navbarBgColor;
+
+      const mobileTrustSignal = document.querySelector('.mobile-trust-signal');
+      mobileTrustSignal.style.borderColor = `${textColor}15`;
+
+      // Trust signal
+      const trustSignal = document.getElementById('trust-signal');
+      trustSignal.style.color = textColor;
+
+      // CTA Button
+      const navCtas = document.querySelectorAll('.nav-cta');
+      navCtas.forEach(cta => {
+        cta.style.background = ctaBgColor;
+        cta.style.color = navbarBgColor;
+        cta.style.borderColor = ctaBgColor;
+      });
+
+      // Hero CTA Button
+      const ctaButton = document.getElementById('cta-button');
+      ctaButton.style.background = ctaBgColor;
+      ctaButton.style.color = backgroundColor;
+
+      // Badges
+      document.querySelectorAll('.badge').forEach(badge => {
+        badge.style.borderColor = `${accentColor}40`;
+        badge.style.color = textColor;
+      });
+
+      // Dashboard mockup
+      const dashboardMockup = document.getElementById('dashboard-mockup');
+      dashboardMockup.style.background = dashboardBgColor;
+      
+      const dashboardHeader = document.getElementById('dashboard-header');
+      dashboardHeader.style.borderColor = `${backgroundColor}15`;
+      dashboardHeader.style.color = backgroundColor;
+
+      const complianceIndicator = document.getElementById('compliance-indicator');
+      complianceIndicator.style.background = `${accentColor}20`;
+      complianceIndicator.style.color = accentColor;
+
+      const statusDot = document.getElementById('status-dot');
+      statusDot.style.background = accentColor;
+
+      // Navigation
+      const dashboardNav = document.getElementById('dashboard-nav');
+      dashboardNav.style.borderColor = `${backgroundColor}15`;
+      dashboardNav.style.color = backgroundColor;
+
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.style.color = backgroundColor;
+      });
+
+      // Dashboard content
+      const dashboardContent = document.getElementById('dashboard-content');
+      dashboardContent.style.color = backgroundColor;
+
+      const filterBadge = document.getElementById('filter-badge');
+      filterBadge.style.borderColor = `${backgroundColor}20`;
+      filterBadge.style.background = `${backgroundColor}10`;
+      filterBadge.style.color = backgroundColor;
+
+      // Table
+      document.querySelectorAll('.data-table th, .data-table td').forEach(cell => {
+        cell.style.borderColor = `${backgroundColor}10`;
+        cell.style.color = backgroundColor;
+      });
+
+      // Record icons
+      for (let i = 1; i <= 3; i++) {
+        const icon = document.getElementById(`record-icon-${i}`);
+        icon.style.background = `${accentColor}15`;
+        icon.style.color = accentColor;
+      }
+
+      // Status badges
+      for (let i = 1; i <= 3; i++) {
+        const statusBadge = document.getElementById(`status-badge-${i}`);
+        statusBadge.style.background = `${accentColor}15`;
+        statusBadge.style.color = accentColor;
+        
+        const statusDotInBadge = document.getElementById(`status-dot-${i}`);
+        statusDotInBadge.style.background = accentColor;
+      }
+
+      // Showcase Section Colors
+      const showcaseSection = document.getElementById('compliance-showcase');
+      showcaseSection.style.background = backgroundColor;
+      showcaseSection.style.color = textColor;
+
+      const showcaseHeading = document.getElementById('showcase-heading');
+      showcaseHeading.style.color = textColor;
+
+      const showcaseDescription = document.getElementById('showcase-description');
+      showcaseDescription.style.color = textColor;
+
+      // Glassmorphic Dashboard
+      const glassDashboard = document.getElementById('glass-dashboard');
+      glassDashboard.style.background = `${textColor}08`;
+      glassDashboard.style.borderColor = `${textColor}15`;
+      glassDashboard.style.color = textColor;
+
+      // Live status
+      const liveDot = document.querySelector('.live-dot');
+      liveDot.style.background = accentColor;
+
+      const liveText = document.querySelector('.live-text');
+      liveText.style.color = textColor;
+
+      // Compliance ring
+      const ringProgress = document.getElementById('ring-progress');
+      ringProgress.style.stroke = accentColor;
+
+      const meterValue = document.getElementById('meter-value');
+      meterValue.style.color = textColor;
+
+      const meterLabel = document.querySelector('.meter-label');
+      meterLabel.style.color = textColor;
+
+      // Alert styling
+      const alert1 = document.getElementById('alert-1');
+      alert1.style.background = `${textColor}12`;
+      alert1.style.borderColor = `${textColor}15`;
+      alert1.style.borderLeftColor = accentColor;
+      alert1.style.color = textColor;
+
+      const alert2 = document.getElementById('alert-2');
+      alert2.style.background = `${textColor}12`;
+      alert2.style.borderColor = `${textColor}15`;
+      alert2.style.borderLeftColor = accentColor;
+      alert2.style.color = textColor;
+
+      const alert3 = document.getElementById('alert-3');
+      alert3.style.background = `${textColor}12`;
+      alert3.style.borderColor = `${textColor}15`;
+      alert3.style.borderLeftColor = accentColor;
+      alert3.style.color = textColor;
+
+      // Alert icons
+      document.querySelectorAll('.alert-icon').forEach(icon => {
+        icon.style.background = `${accentColor}15`;
+        icon.style.color = accentColor;
+      });
+
+      // Sync status
+      const syncStatus = document.querySelector('.sync-status');
+      syncStatus.style.background = `${textColor}08`;
+      syncStatus.style.borderColor = `${textColor}08`;
+      syncStatus.style.color = textColor;
+
+      const syncIcon = document.querySelector('.sync-icon');
+      syncIcon.style.color = accentColor;
+
+      // Transformation Section Colors
+      const transformationSection = document.getElementById('transformation-section');
+      transformationSection.style.background = backgroundColor;
+      transformationSection.style.color = textColor;
+
+      const transformationTitle = document.getElementById('transformation-title');
+      transformationTitle.style.color = textColor;
+
+      const transformationSubtitle = document.getElementById('transformation-subtitle');
+      transformationSubtitle.style.color = textColor;
+
+      // Bento Cards
+      document.querySelectorAll('.bento-card').forEach(card => {
+        card.style.background = `${navbarBgColor}99`;
+        card.style.borderColor = `${textColor}15`;
+        card.style.color = textColor;
+      });
+
+      document.querySelectorAll('.card-label-dot').forEach(dot => {
+        dot.style.background = accentColor;
+      });
+
+      document.querySelectorAll('.card-arrow').forEach(arrow => {
+        arrow.style.background = `${textColor}08`;
+        arrow.style.color = textColor;
+      });
+
+      // Card-specific colors
+      document.querySelectorAll('.spreadsheet-visual, .paper-visual, .disputed-doc, .tool-icon-box, .unified-dashboard').forEach(el => {
+        el.style.background = `${textColor}06`;
+        el.style.borderColor = `${textColor}15`;
+      });
+
+      document.querySelectorAll('.spreadsheet-cell').forEach(cell => {
+        cell.style.background = `${textColor}04`;
+        cell.style.borderColor = `${textColor}10`;
+        cell.style.color = textColor;
+      });
+
+      document.querySelectorAll('.spreadsheet-header-cell').forEach(cell => {
+        cell.style.color = textColor;
+      });
+
+      document.querySelectorAll('.spreadsheet-note').forEach(note => {
+        note.style.borderColor = `${textColor}15`;
+        note.style.color = textColor;
+      });
+
+      document.querySelectorAll('.spreadsheet-icon').forEach(icon => {
+        icon.style.color = textColor;
+      });
+
+      document.querySelectorAll('.ledger-bar').forEach(bar => {
+        bar.style.background = accentColor;
+      });
+
+      document.querySelectorAll('.ledger-stat').forEach(stat => {
+        stat.style.background = `${textColor}05`;
+      });
+
+      document.querySelectorAll('.ledger-stat-label').forEach(label => {
+        label.style.color = textColor;
+      });
+
+      document.querySelectorAll('.ledger-stat-value').forEach(value => {
+        value.style.color = textColor;
+      });
+
+      document.querySelectorAll('.ledger-footer').forEach(footer => {
+        footer.style.background = `${textColor}04`;
+        footer.style.color = textColor;
+      });
+
+      document.querySelectorAll('.ledger-check').forEach(check => {
+        check.style.background = accentColor;
+      });
+
+      document.querySelectorAll('.channel-device').forEach(device => {
+        device.style.background = `${textColor}05`;
+        device.style.borderColor = `${textColor}12`;
+      });
+
+      document.querySelectorAll('.channel-icon').forEach(icon => {
+        icon.style.color = textColor;
+      });
+
+      document.querySelectorAll('.immutable-seal').forEach(seal => {
+        seal.style.background = `${textColor}06`;
+        seal.style.borderColor = `${textColor}15`;
+      });
+
+      document.querySelectorAll('.seal-icon').forEach(icon => {
+        icon.style.color = accentColor;
+      });
+
+      document.querySelectorAll('.immutable-item').forEach(item => {
+        item.style.background = `${textColor}04`;
+      });
+
+      document.querySelectorAll('.unified-dot, .unified-check').forEach(dot => {
+        dot.style.background = accentColor;
+      });
+
+      document.querySelectorAll('.unified-module').forEach(module => {
+        module.style.background = `${textColor}04`;
+      });
+
+      document.querySelectorAll('.unified-footer').forEach(footer => {
+        footer.style.background = `${textColor}04`;
+      });
+
+      // Combine all dynamic styles
+      let styleTag = document.getElementById('dynamic-styles');
+      if (!styleTag) {
+        styleTag = document.createElement('style');
+        styleTag.id = 'dynamic-styles';
+        document.head.appendChild(styleTag);
+      }
+      styleTag.textContent = `
+        .nav-link::after { background: ${accentColor} !important; }
+        .trust-signal::before { background: ${accentColor} !important; }
+        .nav-cta:hover { border-color: ${accentColor} !important; }
+        .cta-button::before { background: ${accentColor} !important; }
+        .nav-item.active::after { background: ${accentColor} !important; }
+        .bento-card:hover .card-arrow { background: ${textColor}15 !important; }
+      `;
+
+      // Update text content - Navigation
+      document.getElementById('brand-name').textContent = config.brand_name || defaultConfig.brand_name;
+      document.getElementById('brand-tagline').textContent = config.brand_tagline || defaultConfig.brand_tagline;
+      document.getElementById('nav-link-1').textContent = config.nav_link_1 || defaultConfig.nav_link_1;
+      document.getElementById('nav-link-2').textContent = config.nav_link_2 || defaultConfig.nav_link_2;
+      document.getElementById('nav-link-3').textContent = config.nav_link_3 || defaultConfig.nav_link_3;
+      document.getElementById('nav-link-4').textContent = config.nav_link_4 || defaultConfig.nav_link_4;
+      document.getElementById('nav-link-5').textContent = config.nav_link_5 || defaultConfig.nav_link_5;
+      document.getElementById('nav-link-6').textContent = config.nav_link_6 || defaultConfig.nav_link_6;
+      
+      const navCtaText = config.nav_cta || defaultConfig.nav_cta;
+      document.querySelectorAll('.nav-cta').forEach(cta => {
+        cta.textContent = navCtaText;
+      });
+      
+      document.getElementById('trust-signal').textContent = config.trust_signal || defaultConfig.trust_signal;
+      document.querySelector('.mobile-trust-signal').textContent = config.trust_signal || defaultConfig.trust_signal;
+
+      // Update text content - Hero
+      document.getElementById('main-headline').textContent = config.main_headline || defaultConfig.main_headline;
+      document.getElementById('sub-headline').textContent = config.sub_headline || defaultConfig.sub_headline;
+      document.getElementById('cta-text').textContent = config.cta_button || defaultConfig.cta_button;
+      document.getElementById('badge-1-text').textContent = config.badge_1 || defaultConfig.badge_1;
+      document.getElementById('badge-2-text').textContent = config.badge_2 || defaultConfig.badge_2;
+      document.getElementById('badge-3-text').textContent = config.badge_3 || defaultConfig.badge_3;
+      document.getElementById('badge-4-text').textContent = config.badge_4 || defaultConfig.badge_4;
+
+      // Update text content - Showcase
+      document.getElementById('showcase-heading').textContent = config.showcase_heading || defaultConfig.showcase_heading;
+      document.getElementById('showcase-description').textContent = config.showcase_description || defaultConfig.showcase_description;
+      document.getElementById('alert-1-message').textContent = config.alert_1_message || defaultConfig.alert_1_message;
+      document.getElementById('alert-2-message').textContent = config.alert_2_message || defaultConfig.alert_2_message;
+      document.getElementById('alert-3-message').textContent = config.alert_3_message || defaultConfig.alert_3_message;
+
+      // Update text content - Transformation
+      document.getElementById('transformation-title').textContent = config.transformation_heading || defaultConfig.transformation_heading;
+      document.getElementById('transformation-subtitle').textContent = config.transformation_subheading || defaultConfig.transformation_subheading;
+      document.getElementById('card-1-before').textContent = config.card_1_before_title || defaultConfig.card_1_before_title;
+      document.getElementById('card-1-after').textContent = config.card_1_after_title || defaultConfig.card_1_after_title;
+      document.getElementById('card-2-before').textContent = config.card_2_before_title || defaultConfig.card_2_before_title;
+      document.getElementById('card-2-after').textContent = config.card_2_after_title || defaultConfig.card_2_after_title;
+      document.getElementById('card-3-before').textContent = config.card_3_before_title || defaultConfig.card_3_before_title;
+      document.getElementById('card-3-after').textContent = config.card_3_after_title || defaultConfig.card_3_after_title;
+      document.getElementById('card-4-before').textContent = config.card_4_before_title || defaultConfig.card_4_before_title;
+      document.getElementById('card-4-after').textContent = config.card_4_after_title || defaultConfig.card_4_after_title;
+
+      // Font sizing - Navigation
+      document.getElementById('brand-name').style.fontSize = `${baseSize * 1.25}px`;
+      document.getElementById('brand-tagline').style.fontSize = `${baseSize * 0.6875}px`;
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.style.fontSize = `${baseSize * 0.9375}px`;
+      });
+      document.querySelectorAll('.nav-cta').forEach(cta => {
+        cta.style.fontSize = `${baseSize * 0.9375}px`;
+      });
+      trustSignal.style.fontSize = `${baseSize * 0.6875}px`;
+      document.querySelector('.mobile-trust-signal').style.fontSize = `${baseSize * 0.6875}px`;
+      document.querySelectorAll('.mobile-nav .nav-link').forEach(link => {
+        link.style.fontSize = `${baseSize * 1.125}px`;
+      });
+
+      // Font sizing - Hero
+      const headline = document.getElementById('main-headline');
+      headline.style.fontSize = `${baseSize * 2.8125}px`;
+
+      const subheadline = document.getElementById('sub-headline');
+      subheadline.style.fontSize = `${baseSize * 1.375}px`;
+
+      ctaButton.style.fontSize = `${baseSize * 1.0625}px`;
+
+      document.querySelectorAll('.badge').forEach(badge => {
+        badge.style.fontSize = `${baseSize * 0.8125}px`;
+      });
+
+      const dashboardTitle = document.getElementById('dashboard-title');
+      dashboardTitle.style.fontSize = `${baseSize * 0.9375}px`;
+
+      complianceIndicator.style.fontSize = `${baseSize * 0.8125}px`;
+
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.style.fontSize = `${baseSize * 0.875}px`;
+      });
+
+      const contentTitle = document.querySelector('.content-title');
+      contentTitle.style.fontSize = `${baseSize * 1.125}px`;
+
+      filterBadge.style.fontSize = `${baseSize * 0.75}px`;
+
+      document.querySelectorAll('.data-table th').forEach(th => {
+        th.style.fontSize = `${baseSize * 0.75}px`;
+      });
+
+      document.querySelectorAll('.data-table td').forEach(td => {
+        td.style.fontSize = `${baseSize * 0.875}px`;
+      });
+
+      document.querySelectorAll('.status-badge').forEach(badge => {
+        badge.style.fontSize = `${baseSize * 0.75}px`;
+      });
+
+      document.querySelectorAll('.timestamp').forEach(timestamp => {
+        timestamp.style.fontSize = `${baseSize * 0.8125}px`;
+      });
+
+      // Showcase Section Font Sizing
+      showcaseHeading.style.fontSize = `${baseSize * 3.5}px`;
+      showcaseDescription.style.fontSize = `${baseSize * 1.125}px`;
+
+      meterValue.style.fontSize = `${baseSize * 3}px`;
+      meterLabel.style.fontSize = `${baseSize * 0.8125}px`;
+
+      document.querySelector('.live-text').style.fontSize = `${baseSize * 0.8125}px`;
+
+      document.querySelectorAll('.alert-type').forEach(el => {
+        el.style.fontSize = `${baseSize * 0.75}px`;
+      });
+
+      document.querySelectorAll('.alert-message').forEach(el => {
+        el.style.fontSize = `${baseSize * 0.9375}px`;
+      });
+
+      document.querySelectorAll('.alert-timestamp').forEach(el => {
+        el.style.fontSize = `${baseSize * 0.75}px`;
+      });
+
+      document.querySelector('.sync-label').style.fontSize = `${baseSize * 0.75}px`;
+      document.querySelector('.sync-url').style.fontSize = `${baseSize * 0.875}px`;
+
+      // Transformation Section Font Sizing
+      transformationTitle.style.fontSize = `${baseSize * 3.75}px`;
+      transformationSubtitle.style.fontSize = `${baseSize * 1.125}px`;
+
+      document.querySelectorAll('.card-label').forEach(label => {
+        label.style.fontSize = `${baseSize * 0.75}px`;
+      });
+
+      document.querySelectorAll('.card-title').forEach(title => {
+        title.style.fontSize = `${baseSize * 1.75}px`;
+      });
+
+      document.querySelectorAll('.ledger-stat').forEach(stat => {
+        stat.style.fontSize = `${baseSize * 0.8125}px`;
+      });
+
+      document.querySelectorAll('.fragmented-label').forEach(label => {
+        label.style.fontSize = `${baseSize * 0.75}px`;
+      });
+
+      document.querySelectorAll('.ledger-stat-label').forEach(label => {
+        label.style.fontSize = `${baseSize * 0.6875}px`;
+      });
+
+      document.querySelectorAll('.ledger-stat-value').forEach(value => {
+        value.style.fontSize = `${baseSize * 1.125}px`;
+      });
+
+      document.querySelectorAll('.ledger-footer').forEach(footer => {
+        footer.style.fontSize = `${baseSize * 0.75}px`;
+      });
+
+      document.querySelectorAll('.ledger-chart').forEach(chart => {
+        chart.style.background = `${textColor}03`;
+      });
+
+      document.querySelectorAll('.unified-module').forEach(module => {
+        module.style.fontSize = `${baseSize * 0.75}px`;
+      });
+
+      document.querySelectorAll('.unified-footer').forEach(footer => {
+        footer.style.fontSize = `${baseSize * 0.8125}px`;
+      });
+
+      document.querySelectorAll('.immutable-item').forEach(item => {
+        item.style.fontSize = `${baseSize * 0.8125}px`;
+      });
+
+      document.querySelectorAll('.immutable-value').forEach(value => {
+        value.style.fontSize = `${baseSize * 0.75}px`;
+      });
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.navbar_bg_color || defaultConfig.navbar_bg_color,
+            set: (value) => {
+              config.navbar_bg_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ navbar_bg_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.cta_bg_color || defaultConfig.cta_bg_color,
+            set: (value) => {
+              config.cta_bg_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ cta_bg_color: value });
+            }
+          },
+          {
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => {
+              config.accent_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ accent_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            if (window.elementSdk) window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            if (window.elementSdk) window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["brand_name", config.brand_name || defaultConfig.brand_name],
+        ["brand_tagline", config.brand_tagline || defaultConfig.brand_tagline],
+        ["nav_link_1", config.nav_link_1 || defaultConfig.nav_link_1],
+        ["nav_link_2", config.nav_link_2 || defaultConfig.nav_link_2],
+        ["nav_link_3", config.nav_link_3 || defaultConfig.nav_link_3],
+        ["nav_link_4", config.nav_link_4 || defaultConfig.nav_link_4],
+        ["nav_link_5", config.nav_link_5 || defaultConfig.nav_link_5],
+        ["nav_link_6", config.nav_link_6 || defaultConfig.nav_link_6],
+        ["nav_cta", config.nav_cta || defaultConfig.nav_cta],
+        ["trust_signal", config.trust_signal || defaultConfig.trust_signal],
+        ["main_headline", config.main_headline || defaultConfig.main_headline],
+        ["sub_headline", config.sub_headline || defaultConfig.sub_headline],
+        ["cta_button", config.cta_button || defaultConfig.cta_button],
+        ["badge_1", config.badge_1 || defaultConfig.badge_1],
+        ["badge_2", config.badge_2 || defaultConfig.badge_2],
+        ["badge_3", config.badge_3 || defaultConfig.badge_3],
+        ["badge_4", config.badge_4 || defaultConfig.badge_4],
+        ["showcase_heading", config.showcase_heading || defaultConfig.showcase_heading],
+        ["showcase_description", config.showcase_description || defaultConfig.showcase_description],
+        ["alert_1_message", config.alert_1_message || defaultConfig.alert_1_message],
+        ["alert_2_message", config.alert_2_message || defaultConfig.alert_2_message],
+        ["alert_3_message", config.alert_3_message || defaultConfig.alert_3_message],
+        ["transformation_heading", config.transformation_heading || defaultConfig.transformation_heading],
+        ["transformation_subheading", config.transformation_subheading || defaultConfig.transformation_subheading],
+        ["card_1_before_title", config.card_1_before_title || defaultConfig.card_1_before_title],
+        ["card_1_after_title", config.card_1_after_title || defaultConfig.card_1_after_title],
+        ["card_2_before_title", config.card_2_before_title || defaultConfig.card_2_before_title],
+        ["card_2_after_title", config.card_2_after_title || defaultConfig.card_2_after_title],
+        ["card_3_before_title", config.card_3_before_title || defaultConfig.card_3_before_title],
+        ["card_3_after_title", config.card_3_after_title || defaultConfig.card_3_after_title],
+        ["card_4_before_title", config.card_4_before_title || defaultConfig.card_4_before_title],
+        ["card_4_after_title", config.card_4_after_title || defaultConfig.card_4_after_title]
+      ]);
+    }
+
+    (async () => {
+      if (window.elementSdk) {
+        await window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities,
+          mapToEditPanelValues
+        });
+      } else {
+        await onConfigChange(defaultConfig);
+      }
+    })();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b9b2e3652287f8b',t:'MTc2NzcwMjE0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

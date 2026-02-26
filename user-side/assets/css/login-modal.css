@@ -1,0 +1,204 @@
+/* Login Modal Styles */
+.modal-content {
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.modal-header.bg-gradient {
+    background: linear-gradient(135deg, #0b3c8a 0%, #122142 45%, #0b3c8a 100%) !important;
+}
+
+.modal-header.bg-gradient .btn-close-white {
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+}
+
+.modal-header.bg-gradient .btn-close-white:focus {
+    opacity: 1;
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.5);
+}
+
+.login-logo-wrapper {
+    width: 90px;
+    height: 90px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    padding: 8px;
+}
+
+.login-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    display: none;
+}
+
+.login-header-text h5 {
+    color: #ffffff !important;
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+.login-header-text p {
+    color: #ffffff !important;
+    font-weight: 500;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.modal-title {
+    font-size: 1.35rem;
+    letter-spacing: 0.5px;
+}
+
+.form-control-lg {
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    border: 1px solid #d3def8;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.form-control-lg:focus {
+    border-color: #0b3c8a;
+    box-shadow: 0 0 0 0.2rem rgba(11, 60, 138, 0.15);
+    outline: none;
+}
+
+.form-label {
+    color: #122142;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.input-group .btn-outline-secondary {
+    border-color: #d3def8;
+    color: #6c7aa5;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+}
+
+.toggle-password-btn {
+    background: #ffffff;
+    border: 1px solid #d3def8 !important;
+    color: #0b3c8a !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggle-password-btn:hover {
+    background: #f8faff;
+    border-color: #0b3c8a !important;
+    color: #0a58ca !important;
+}
+
+.toggle-password-btn:focus {
+    border-color: #0b3c8a !important;
+    box-shadow: 0 0 0 0.2rem rgba(11, 60, 138, 0.15) !important;
+}
+
+.input-group .btn-outline-secondary:hover {
+    border-color: #0b3c8a;
+    color: #0b3c8a;
+    background: transparent;
+}
+
+.form-check-input {
+    width: 1.1rem;
+    height: 1.1rem;
+    margin-top: 0.2rem;
+    border: 1.5px solid #d3def8;
+    cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: #0b3c8a;
+    border-color: #0b3c8a;
+}
+
+.form-check-input:focus {
+    border-color: #0b3c8a;
+    box-shadow: 0 0 0 0.25rem rgba(11, 60, 138, 0.25);
+}
+
+.form-check-label {
+    color: #3f4c62;
+    cursor: pointer;
+    user-select: none;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+    border: none;
+    color: #122142;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.btn-warning:hover {
+    background: linear-gradient(135deg, #ffb300 0%, #ffa200 100%);
+    color: #122142;
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-outline-primary {
+    color: #0b3c8a;
+    border: 2px solid #0b3c8a;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-primary:hover {
+    background: #0b3c8a;
+    color: #ffffff;
+    border-color: #0b3c8a;
+    box-shadow: 0 4px 12px rgba(11, 60, 138, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+}
+
+.modal-footer {
+    background: #f8faff;
+    padding: 1rem 1.5rem;
+}
+
+.btn-secondary {
+    background: #6c7aa5;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-secondary:hover {
+    background: #525e7d;
+}
+
+/* Focus visible styles for accessibility */
+.form-control-lg:focus-visible,
+.btn:focus-visible {
+    outline: 2px solid #0b3c8a;
+    outline-offset: 2px;
+}
+
+/* Modal animation */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal-backdrop {
+    backdrop-filter: blur(2px);
+}

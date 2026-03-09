@@ -1,5 +1,4 @@
 // Propert-Ease Configuration Template
-// Copy this file to config.js and add your API key.
-// config.js is ignored by git to prevent secret exposure.
-
-window.PROPERTEASE_GEMINI_KEY = 'YOUR_GEMINI_API_KEY_HERE';
+// The chatbot API key is stored securely on the server (Vercel Environment Variables).
+// No client-side API key configuration is needed.
+// Set OPENROUTER_API_KEY in your Vercel project's Environment Variables.

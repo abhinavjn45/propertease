@@ -3,33 +3,60 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const { modelName, systemPrompt, contents } = req.body;
-    const apiKey = process.env.GEMINI_API_KEY;
+    const { systemPrompt, messages } = req.body;
+    const apiKey = process.env.OPENROUTER_API_KEY;
 
     if (!apiKey) {
-        return res.status(500).json({ error: 'Gemini API key not configured on server' });
+        return res.status(500).json({ error: 'OpenRouter API key not configured on server' });
     }
 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+    // Build the messages array for OpenRouter (OpenAI-compatible format)
+    const openRouterMessages = [];
+
+    // Add system prompt
+    if (systemPrompt) {
+        openRouterMessages.push({ role: 'system', content: systemPrompt });
+    }
+
+    // Add conversation messages
+    if (messages && Array.isArray(messages)) {
+        messages.forEach(msg => {
+            openRouterMessages.push({
+                role: msg.role === 'model' ? 'assistant' : msg.role,
+                content: msg.content
+            });
+        });
+    }
 
     try {
-        const response = await fetch(url, {
+        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`,
+                'HTTP-Referer': req.headers.referer || 'https://propertease.in',
+                'X-Title': 'Propert-Ease Chatbot'
+            },
             body: JSON.stringify({
-                system_instruction: {
-                    parts: [{ text: systemPrompt }]
-                },
-                contents: contents,
-                generationConfig: {
-                    temperature: 0.7,
-                    maxOutputTokens: 500,
-                }
+                model: 'google/gemini-2.5-flash',
+                messages: openRouterMessages,
+                temperature: 0.7,
+                max_tokens: 500,
             })
         });
 
         const data = await response.json();
-        return res.status(response.status).json(data);
+
+        if (!response.ok) {
+            console.error('OpenRouter error:', data);
+            return res.status(response.status).json({
+                error: data?.error?.message || 'OpenRouter API error'
+            });
+        }
+
+        // Return in a simplified format the client can parse
+        const reply = data?.choices?.[0]?.message?.content || '';
+        return res.status(200).json({ reply });
     } catch (error) {
         console.error('Proxy error:', error);
         return res.status(500).json({ error: 'Internal server error' });

@@ -9,8 +9,6 @@
 
     // ──────────────────────────── CONFIG ────────────────────────────
     const CONFIG = {
-        apiKey: window.PROPERTEASE_GEMINI_KEY || '',
-        models: ['gemini-2.5-flash-preview-05-20', 'gemini-2.5-flash'],  // available models for this API key
         knowledgeBasePath: null,       // auto-detected
         topK: 3,                       // chunks to retrieve
         maxHistory: 6,                 // conversation pairs to keep
@@ -23,7 +21,6 @@
     let chatHistory = [];
     let isOpen = false;
     let isTyping = false;
-    let workingModel = CONFIG.models[0]; // track which model works
 
     // ──────────────────────────── UTILITIES ────────────────────────────
 
@@ -136,7 +133,7 @@
         return scored.slice(0, CONFIG.topK).filter(s => s.score > 0.05);
     }
 
-    // ──────────────────────────── GEMINI API ────────────────────────────
+    // ──────────────────────────── API (via Server Proxy) ────────────────────────────
 
     /** Build the system prompt with retrieved context */
     function buildPrompt(query, chunks) {
@@ -163,114 +160,54 @@ ${context}`;
         return systemPrompt;
     }
 
-    /** Try a single API call with a specific model */
-    async function tryGeminiCall(modelName, systemPrompt, contents) {
-        // First, try the secure proxy (Vercel deployment)
-        try {
-            const proxyResponse = await fetch('/api/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ modelName, systemPrompt, contents })
-            });
-
-            if (proxyResponse.ok) {
-                const data = await proxyResponse.json();
-                const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-                if (text) return text;
-            }
-        } catch (e) {
-            console.warn('[Chatbot] Proxy unavailable, falling back to client-side call.');
-        }
-
-        // Fallback: Direct client-side call (local development)
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${CONFIG.apiKey}`;
-
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                system_instruction: {
-                    parts: [{ text: systemPrompt }]
-                },
-                contents: contents,
-                generationConfig: {
-                    temperature: 0.7,
-                    maxOutputTokens: 500,
-                }
-            })
-        });
-
-        if (!response.ok) {
-            const err = await response.json().catch(() => ({}));
-            throw { status: response.status, body: err };
-        }
-
-        const data = await response.json();
-        const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-        if (!text) throw { status: 0, body: 'Empty response' };
-        return text;
-    }
-
-    /** Send message to Gemini API — tries multiple models with retry */
-    async function callGemini(query, chunks) {
+    /** Send message to AI via server-side proxy (no API key on client) */
+    async function callAI(query, chunks) {
         const systemPrompt = buildPrompt(query, chunks);
 
-        // Build contents array with history
-        const contents = [];
+        // Build messages array with history
+        const messages = [];
         chatHistory.forEach(msg => {
-            contents.push({
-                role: msg.role === 'user' ? 'user' : 'model',
-                parts: [{ text: msg.text }]
+            messages.push({
+                role: msg.role === 'user' ? 'user' : 'assistant',
+                content: msg.text
             });
         });
-        contents.push({ role: 'user', parts: [{ text: query }] });
+        messages.push({ role: 'user', content: query });
 
-        // Try the working model first, then fallbacks
-        const modelsToTry = [workingModel, ...CONFIG.models.filter(m => m !== workingModel)];
-        let lastError = null;
+        try {
+            console.log('[Chatbot] Sending request via server proxy...');
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ systemPrompt, messages })
+            });
 
-        for (const model of modelsToTry) {
-            // Try up to 2 times per model (with delay on 429)
-            for (let attempt = 0; attempt < 2; attempt++) {
-                try {
-                    console.log(`[Chatbot] Trying model: ${model} (attempt ${attempt + 1})`);
-                    const text = await tryGeminiCall(model, systemPrompt, contents);
-                    workingModel = model; // remember which model worked
-                    console.log(`[Chatbot] Success with model: ${model}`);
-                    return text;
-                } catch (err) {
-                    lastError = err;
-                    console.warn(`[Chatbot] ${model} failed (${err.status}):`, err.body);
+            const data = await response.json();
 
-                    if (err.status === 429 && attempt === 0) {
-                        // Rate limited — wait and retry same model
-                        console.log(`[Chatbot] Rate limited, waiting 3s...`);
-                        await new Promise(r => setTimeout(r, 3000));
-                        continue;
-                    }
-                    break; // try next model
+            if (!response.ok) {
+                console.error('[Chatbot] Proxy error:', data);
+
+                if (response.status === 500 && data?.error?.includes('not configured')) {
+                    return "⚠️ **Configuration Required**: Please add `OPENROUTER_API_KEY` to your Vercel Environment Variables.";
                 }
+                if (response.status === 429) {
+                    return "I'm experiencing high traffic right now. Please wait a few seconds and try again! 😊";
+                }
+                return "Sorry, I'm having trouble connecting. Please try again or contact us at support@propertease.in.";
             }
-        }
 
-        // All models failed
-        console.error('[Chatbot] All models failed. Last error:', lastError);
-
-        // Specific guidance for missing configuration
-        if (!CONFIG.apiKey || CONFIG.apiKey === 'YOUR_GEMINI_API_KEY_HERE') {
-            if (lastError?.body?.error?.includes('not configured on server')) {
-                return "⚠️ **Vercel Configuration Required**: Please add `GEMINI_API_KEY` to your Vercel Environment Variables.";
+            const reply = data?.reply;
+            if (!reply) {
+                console.warn('[Chatbot] Empty reply from proxy');
+                return "Sorry, I didn't get a response. Please try again.";
             }
-            return "⚠️ **Local Configuration Required**: Please copy `assets/js/config.example.js` to `assets/js/config.js` and add your **Gemini API Key**.";
-        }
 
-        if (lastError?.status === 429) {
-            return "I'm experiencing high traffic right now. Please wait a few seconds and try again! 😊";
+            console.log('[Chatbot] Response received successfully.');
+            return reply;
+        } catch (error) {
+            console.error('[Chatbot] Network error:', error);
+            return "Sorry, I'm having trouble connecting. Please check your internet connection and try again.";
         }
-        if (lastError?.status === 403) {
-            return "⚠️ API key issue. Please verify your Gemini API key at https://aistudio.google.com/apikey";
-        }
-        return "Sorry, I'm having trouble connecting. Please try again or contact us at support@propertease.in.";
     }
 
     // ──────────────────────────── CHAT UI ────────────────────────────
@@ -431,7 +368,7 @@ ${context}`;
         const chunks = retrieve(query);
 
         // Call Gemini
-        const response = await callGemini(query, chunks);
+        const response = await callAI(query, chunks);
 
         // Hide typing, show response
         showTyping(false);

@@ -1,0 +1,10 @@
+{
+    "name": "propertease-local",
+    "private": true,
+    "scripts": {
+        "dev": "node server.js"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.5"
+    }
+}
